@@ -23,26 +23,29 @@ export const projects = [
     image: "projects/kaizen-factory-stack.png",
     github: "https://github.com/vikram-ejjagiri-ai/kaizen-factory-stack"
   },
-  {
+    {
     id: "predictive-maintenance",
     number: "02",
-    title: "Predictive Maintenance Dashboard",
+    title: "Predictive Maintenance: Machine Failure Prediction",
     shortTitle: "Predictive Maintenance",
     category: "Industrial AI",
-    tags: ["Machine Learning", "Data Analytics", "Power BI"],
+    tags: ["Machine Learning", "Explainable AI", "Power BI"],
     description:
-      "A data-driven solution for monitoring machine condition, predicting potential equipment failures, and supporting intelligent maintenance planning.",
+      "A machine failure prediction system for a CNC milling process: physics-based features, cost-optimized alarms and explanations a maintenance technician can act on.",
     objective:
-      "Develop a data-driven predictive maintenance solution for monitoring machine condition using temperature and vibration data to support intelligent maintenance planning.",
+      "Predict machine failures from temperature, speed, torque and tool-wear data, identify the likely failure type, and support maintenance planning with explainable alarms.",
     achievements: [
-      "Processed and analyzed manufacturing sensor data using Python.",
-      "Cleaned and prepared production datasets for machine learning applications.",
-      "Developed and evaluated machine learning models to predict potential equipment failures.",
-      "Built an interactive Power BI dashboard for machine health, maintenance KPIs, and production performance.",
-      "Demonstrated how data-driven monitoring supports predictive maintenance and equipment availability."
+      "Defined the business problem and technical requirements, prioritizing missed failures (10x cost) over false alarms.",
+      "Audited data quality and found 27 contradicting labels and 24 multi-type failures, which shaped a multi-label failure-type model.",
+      "Engineered physics-based features (power, temperature difference, tool strain) that cut the model's business cost by about a third.",
+      "Achieved 82% recall at 93% precision on a held-out test set with a random forest, benchmarked against expert rules and a dummy baseline.",
+      "Explained every alarm with SHAP and the physical limit exceeded; recommended planned tool changes for the random tool-wear failures the model cannot predict.",
+      "Prepared scored data and a Power BI dashboard design for machine health, alarms and model performance."
     ],
-    tools: ["Python", "Pandas", "Scikit-learn", "SQL", "Power BI", "DAX", "Excel"],
-    visual: "sensor"
+    tools: ["Python", "Scikit-learn", "SHAP", "Pandas", "Power BI", "DAX", "Pytest"],
+    visual: "sensor",
+    image: "projects/predictive-maintenance.png",
+    github: "https://github.com/vikram-ejjagiri-ai/kaizen-machine-failure-prediction"
   },
   {
     id: "incident-assistant",
