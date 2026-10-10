@@ -5,6 +5,7 @@ import {
   Rocket, X, Eye, Bot, Factory, Sparkles
 } from "lucide-react";
 import { projects } from "./data/projects";
+const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
 const skills = {
   "AI & Machine Learning": ["Python", "Machine Learning", "Deep Learning", "Generative AI", "NLP", "Computer Vision", "PyTorch", "Scikit-learn"],
@@ -46,7 +47,7 @@ function App() {
             {["about","projects","skills","journey","contact"].map(x =>
               <button key={x} onClick={() => go(x)}>{x[0].toUpperCase()+x.slice(1)}</button>
             )}
-            <a className="nav-resume" href="/resume.pdf" target="_blank" rel="noreferrer">Resume <ArrowUpRight size={15}/></a>
+            <a className="nav-resume" href={asset("resume.pdf")} target="_blank" rel="noreferrer">Resume <ArrowUpRight size={15}/></a>
           </div>
           <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
             {menuOpen ? <X/> : <Menu/>}
@@ -64,7 +65,7 @@ function App() {
             <p className="hero-text">I build practical AI solutions for intelligent manufacturing, robotics, and real-world industrial applications.</p>
             <div className="hero-actions">
               <button className="button primary" onClick={() => go("projects")}>View Projects <MoveUpRight size={17}/></button>
-              <a className="button ghost" href="/resume.pdf" target="_blank" rel="noreferrer">Download Resume <Download size={17}/></a>
+              <a className="button ghost" href={asset("resume.pdf")} target="_blank" rel="noreferrer">Download Resume <Download size={17}/></a>
             </div>
             <div className="hero-meta"><span>Based in Germany / India</span><span>Master's • THD</span></div>
           </div>
@@ -192,7 +193,7 @@ function EngineeringNetwork(){
 
 function ProjectCard({project,onOpen}){
   return <button className="project-card" onClick={()=>onOpen(project)}>
-    <ProjectVisual type={project.visual}/>
+    <ProjectVisual project={project}/>
     <div className="project-card-content">
       <div className="card-top"><span>{project.number}</span><span>{project.category}</span></div>
       <h3>{project.title}</h3><p>{project.description}</p>
@@ -201,7 +202,14 @@ function ProjectCard({project,onOpen}){
   </button>
 }
 
-function ProjectVisual({type}){
+function ProjectVisual({project}){
+  const type = project.visual;
+  if (project.image) {
+    return <div className={`project-visual ${type}`}>
+      <img src={asset(project.image)} alt={`${project.title} screenshot`}
+        style={{width: "100%", height: "100%", objectFit: "cover", display: "block"}}/>
+    </div>
+  }
   return <div className={`project-visual ${type}`}>
     {type==="sensor" && <><div className="chart"><i/><i/><i/><i/><i/><i/><i/><i/></div><div className="visual-label">MACHINE HEALTH / LIVE</div><div className="visual-number">87<span>%</span></div></>}
     {type==="nlp" && <><div className="terminal"><span>&gt; incident.detect()</span><span>classification: bearing fault</span><span>severity: high</span><span>recommendation: inspect</span></div><div className="visual-label">AI INCIDENT ANALYSIS</div></>}
@@ -215,7 +223,7 @@ function ProjectModal({project,onClose}){
   return <div className="modal-backdrop" onMouseDown={e=>e.target===e.currentTarget&&onClose()}>
     <article className="modal">
       <button className="modal-close" onClick={onClose}><X/></button>
-      <div className="modal-visual"><ProjectVisual type={project.visual}/></div>
+      <div className="modal-visual"><ProjectVisual project={project}/></div>
       <p className="section-label">{project.number} / {project.category}</p>
       <h2>{project.title}</h2>
       <p className="modal-lead">{project.description}</p>
@@ -224,6 +232,7 @@ function ProjectModal({project,onClose}){
         <div><h4>ACHIEVEMENTS</h4>{project.achievements.length ? <ul>{project.achievements.map(x=><li key={x}>{x}</li>)}</ul> : <p>Detailed source material will be added when the original project report becomes available.</p>}</div>
       </div>
       {project.tools.length>0 && <><h4>TOOLS USED</h4><div className="modal-tags">{project.tools.map(t=><span key={t}>{t}</span>)}</div></>}
+            {project.github && <a className="button primary" href={project.github} target="_blank" rel="noreferrer" style={{marginTop: "1.5rem"}}><Github size={17}/> View code on GitHub</a>}
     </article>
   </div>
 }

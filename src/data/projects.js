@@ -1,7 +1,31 @@
 export const projects = [
+    {
+    id: "kaizen-factory-stack",
+    number: "01",
+    title: "Kaizen Factory Stack: Industry 4.0 Data Platform",
+    shortTitle: "Factory Data Platform",
+    category: "Industrial AI",
+    tags: ["Industry 4.0", "OPC UA", "MQTT"],
+    description:
+      "An end-to-end industrial data platform built from scratch: simulated machines stream live sensor data through OPC UA and MQTT into PostgreSQL, monitored on a live Grafana dashboard.",
+    objective:
+      "Build the data foundation that industrial AI depends on: collecting machine data the way real factories do, storing it reliably, and making machine condition visible in real time.",
+    achievements: [
+      "Simulated a bottling line (pump, filler, capper) with 7 sensors as an OPC UA server, configurable via YAML without code changes.",
+      "Modelled realistic sensor signals as true value + Gaussian noise + gradual wear drift.",
+      "Built a fault-tolerant OPC UA to MQTT bridge with automatic reconnect, structured logging and retained online/offline status.",
+      "Organized all data in a Unified Namespace topic hierarchy (enterprise/site/area/line/machine/sensor).",
+      "Developed an ingest service storing every reading in PostgreSQL, using parameterized SQL and keeping secrets out of the source code.",
+      "Created a live Grafana dashboard with vibration severity zones inspired by ISO 10816."
+    ],
+    tools: ["Python", "OPC UA", "MQTT", "PostgreSQL", "Grafana", "asyncua", "Mosquitto", "Git"],
+    visual: "sensor",
+    image: "projects/kaizen-factory-stack.png",
+    github: "https://github.com/vikram-ejjagiri-ai/kaizen-factory-stack"
+  },
   {
     id: "predictive-maintenance",
-    number: "01",
+    number: "02",
     title: "Predictive Maintenance Dashboard",
     shortTitle: "Predictive Maintenance",
     category: "Industrial AI",
@@ -22,7 +46,7 @@ export const projects = [
   },
   {
     id: "incident-assistant",
-    number: "02",
+    number: "03",
     title: "Intelligent Manufacturing Incident Assistant",
     shortTitle: "Incident Assistant",
     category: "Industrial AI",
@@ -43,7 +67,7 @@ export const projects = [
   },
   {
     id: "generative-engineering",
-    number: "03",
+    number: "04",
     title: "Generative Engineering Concept Studio",
     shortTitle: "Generative Engineering",
     category: "Generative AI",
@@ -64,7 +88,7 @@ export const projects = [
   },
   {
     id: "scara",
-    number: "04",
+    number: "05",
     title: "Intelligent SCARA Robotic System",
     shortTitle: "SCARA Robotics",
     category: "Robotics",
@@ -84,7 +108,7 @@ export const projects = [
   },
   {
     id: "ornithopter",
-    number: "05",
+    number: "06",
     title: "Design and Analysis of Ornithopter",
     shortTitle: "Ornithopter",
     category: "Engineering",
