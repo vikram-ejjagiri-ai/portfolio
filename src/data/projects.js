@@ -19,6 +19,7 @@ export const projects = [
       "Created a live Grafana dashboard with vibration severity zones inspired by ISO 10816."
     ],
     tools: ["Python", "OPC UA", "MQTT", "PostgreSQL", "Grafana", "asyncua", "Mosquitto", "Git"],
+    result: "7 live sensors streamed end to end: OPC UA → MQTT → PostgreSQL → Grafana.",
     visual: "sensor",
     image: "projects/kaizen-factory-stack.png",
     github: "https://github.com/vikram-ejjagiri-ai/kaizen-factory-stack"
@@ -40,9 +41,10 @@ export const projects = [
       "Engineered physics-based features (power, temperature difference, tool strain) that cut the model's business cost by about a third.",
       "Achieved 82% recall at 93% precision on a held-out test set with a random forest, benchmarked against expert rules and a dummy baseline.",
       "Explained every alarm with SHAP and the physical limit exceeded; recommended planned tool changes for the random tool-wear failures the model cannot predict.",
-      "Prepared scored data and a Power BI dashboard design for machine health, alarms and model performance."
+      "Built a four-page Power BI dashboard: machine health, maintenance alarms, model performance and a threshold what-if analysis."
     ],
     tools: ["Python", "Scikit-learn", "SHAP", "Pandas", "Power BI", "DAX", "Pytest"],
+    result: "82 % recall at 93 % precision; physics features cut business cost by about a third.",
     visual: "sensor",
     image: "projects/predictive-maintenance.png",
     github: "https://github.com/vikram-ejjagiri-ai/kaizen-machine-failure-prediction"
@@ -67,6 +69,7 @@ export const projects = [
       "Exported the model to ONNX (verified against PyTorch) and benchmarked about 120 ms per image on a laptop CPU."
     ],
     tools: ["Python", "PyTorch", "ONNX Runtime", "Streamlit", "scikit-learn", "Pytest"],
+    result: "Caught 46 of 47 unseen defects with zero good parts rejected (image AUROC 1.000).",
     visual: "sensor",
     image: "projects/visual-quality-inspection.png",
     github: "https://github.com/vikram-ejjagiri-ai/kaizen-visual-quality-inspection"
@@ -90,6 +93,7 @@ export const projects = [
       "Added guardrails: refuses to explain how to bypass safety devices, says 'not found' instead of guessing, and flags any number that cannot be traced to the plant data."
     ],
     tools: ["Python", "pandas", "Streamlit", "Plotly", "Ollama", "RAG", "Pytest"],
+    result: "95.9 % pass rate on 49 evaluation questions; hybrid search 91.7 % Hit@3.",
     visual: "sensor",
     image: "projects/oee-maintenance-copilot.png",
     github: "https://github.com/vikram-ejjagiri-ai/kaizen-oee-maintenance-copilot"
@@ -122,9 +126,9 @@ export const projects = [
     category: "Engineering",
     tags: ["Honors Thesis", "Mechanical Design"],
     description:
-      "Bachelor's Honors Thesis focused on the design and analysis of an ornithopter.",
+      "Bachelor's honors thesis on the design and analysis of an ornithopter, a flapping-wing aircraft.",
     objective:
-      "Bachelor's Honors Thesis — detailed project information will be added when the original thesis/report becomes available.",
+      "Design an ornithopter and analyse its mechanical design as the honors thesis of the Bachelor's degree in Mechanical Engineering.",
     achievements: [],
     tools: [],
     visual: "ornithopter"

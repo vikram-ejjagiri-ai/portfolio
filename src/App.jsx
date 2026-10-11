@@ -7,25 +7,39 @@ import {
 import { projects } from "./data/projects";
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
+const GITHUB = "https://github.com/vikram-ejjagiri-ai";
+const LINKEDIN = "https://www.linkedin.com/in/vikramejjagiri";
+const EMAIL = "vikramejjagiri08@gmail.com";
+
+// Each group lists skills that a project on this page demonstrates.
 const skills = {
-  "AI & Machine Learning": ["Python", "Machine Learning", "Deep Learning", "Generative AI", "NLP", "Computer Vision", "PyTorch", "Scikit-learn"],
-  "Data & Analytics": ["Pandas", "NumPy", "SQL", "Power BI", "Power Query", "DAX", "Data Visualization"],
-  "Industrial AI": ["Predictive Maintenance", "Smart Manufacturing", "Industry 4.0", "Manufacturing Analytics", "Process Optimization", "Digital Production Systems"],
-  "Robotics & Engineering": ["Robotics", "Industrial Automation", "Fusion 360", "AutoCAD", "MSC Adams", "PLC (Basic)", "ROS (Basic)"]
+  "Machine Learning & Vision": ["Python", "scikit-learn", "PyTorch", "Anomaly Detection (PatchCore)", "Explainable AI (SHAP)", "ONNX / Edge AI", "Pandas", "NumPy"],
+  "Industrial Data & IIoT": ["OPC UA", "MQTT", "Unified Namespace", "PostgreSQL", "SQL", "Grafana", "Power BI", "DAX"],
+  "Manufacturing & Industrial AI": ["OEE (ISO 22400)", "Predictive Maintenance", "Visual Quality Inspection", "MES & CMMS Data", "TPM / SMED", "Industry 4.0"],
+  "LLMs, Tools & Engineering": ["RAG", "Ollama (local LLMs)", "Streamlit", "Git", "Pytest", "Fusion 360", "MSC Adams", "PLC (Basic)", "ROS (Basic)"]
 };
+
+// The four Kaizen projects form one pipeline, like a real factory AI stack.
+const pipeline = [
+  ["01", "Collect", "Machine data via OPC UA and MQTT into PostgreSQL", "kaizen-factory-stack"],
+  ["02", "Predict", "Failures before they happen, with explainable alarms", "predictive-maintenance"],
+  ["03", "Inspect", "Defects on camera images, located on a heatmap", "visual-quality-inspection"],
+  ["04", "Improve", "OEE losses and a copilot for maintenance questions", "oee-maintenance-copilot"],
+];
 
 const journey = [
   ["01", "Mechanical Engineering", "Built a foundation in mechanical design, engineering systems and automation."],
   ["02", "Robotics & Automation", "Explored robotic systems through SCARA design, simulation and hands-on engineering work."],
   ["03", "Applied AI", "Moved into machine learning, computer vision, NLP and generative AI."],
   ["04", "Intelligent Manufacturing", "Focused current studies on applying AI to digital production and Industry 4.0."],
+  ["05", "Kaizen Matrix", "Building an end-to-end industrial AI project series: data platform, predictive maintenance, visual inspection and an OEE copilot."],
 ];
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [filter, setFilter] = useState("All");
   const [activeProject, setActiveProject] = useState(null);
-  const categories = ["All", "Industrial AI", "Generative AI", "Robotics", "Engineering"];
+  const categories = ["All", ...new Set(projects.map(p => p.category))];
   const filtered = filter === "All" ? projects : projects.filter(p => p.category === filter);
 
   useEffect(() => {
@@ -47,6 +61,8 @@ function App() {
             {["about","projects","skills","journey","contact"].map(x =>
               <button key={x} onClick={() => go(x)}>{x[0].toUpperCase()+x.slice(1)}</button>
             )}
+            <a className="nav-icon" href={GITHUB} target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={17}/></a>
+            <a className="nav-icon" href={LINKEDIN} target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={17}/></a>
             <a className="nav-resume" href={asset("resume.pdf")} target="_blank" rel="noreferrer">Resume <ArrowUpRight size={15}/></a>
           </div>
           <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
@@ -59,15 +75,16 @@ function App() {
         <section id="home" className="hero section-dark">
           <div className="hero-grid" />
           <div className="hero-copy reveal">
-            <div className="status"><span className="status-dot"/> Open to AI/ML & Robotics Opportunities</div>
+            <div className="status"><span className="status-dot"/> Available now · Werkstudent (20 h/week), internship, thesis & full-time roles</div>
             <p className="eyebrow">AI • ROBOTICS • COMPUTER VISION • INTELLIGENT MANUFACTURING</p>
             <h1>Applied AI<br/><em>Engineer</em></h1>
-            <p className="hero-text">I build practical AI solutions for intelligent manufacturing, robotics, and real-world industrial applications.</p>
+            <p className="hero-text">M.Eng. student in Applied AI for Digital Production at TH Deggendorf. I build industrial AI end to end: machine data pipelines, predictive maintenance, visual quality inspection and LLM copilots for the shop floor.</p>
             <div className="hero-actions">
               <button className="button primary" onClick={() => go("projects")}>View Projects <MoveUpRight size={17}/></button>
               <a className="button ghost" href={asset("resume.pdf")} target="_blank" rel="noreferrer">Download Resume <Download size={17}/></a>
+              <a className="button ghost" href={GITHUB} target="_blank" rel="noreferrer"><Github size={17}/> GitHub</a>
             </div>
-            <div className="hero-meta"><span>Based in Germany / India</span><span>Master's • THD</span></div>
+            <div className="hero-meta"><span>Cham, Bavaria · Germany</span><span>M.Eng. · TH Deggendorf</span><span>English · German (B1)</span></div>
           </div>
           <EngineeringNetwork/>
           <div className="scroll-hint">SCROLL TO EXPLORE <span>↓</span></div>
@@ -86,9 +103,10 @@ function App() {
               <p>I am currently pursuing a Master's in <strong>Applied AI for Digital Production Management</strong> at Technische Hochschule Deggendorf, focusing on practical AI for industrial and production challenges.</p>
               <p>Today, my work spans <strong>AI/ML, computer vision, NLP, generative AI, robotics, and intelligent manufacturing</strong>.</p>
               <div className="about-facts">
-                <div><strong>2.3 / 4.0</strong><span>Current Master's grade</span></div>
+                <div><strong>2.3</strong><span>Current Master's grade<br/>(German scale, 1.0 = best)</span></div>
                 <div><strong>8.17 / 10</strong><span>Bachelor's CGPA</span></div>
                 <div><strong>9.52 / 10</strong><span>Diploma CGPA</span></div>
+                <div><strong>B1</strong><span>German · English<br/>professional</span></div>
               </div>
             </div>
           </div>
@@ -98,7 +116,15 @@ function App() {
           <div className="container">
             <div className="section-head">
               <div><p className="section-label light">02 / PROJECTS</p><h2>Selected work<span>.</span></h2></div>
-              <p>Applied AI systems built around practical engineering and manufacturing problems.</p>
+              <p>Four connected industrial AI projects, each with code, tests, documentation and honest evaluation on GitHub.</p>
+            </div>
+            <div className="pipeline">
+              {pipeline.map(([n, verb, text, id]) => {
+                const p = projects.find(x => x.id === id);
+                return <button className="pipeline-step" key={id} onClick={() => p && setActiveProject(p)}>
+                  <span className="pipeline-num">{n}</span><strong>{verb}</strong><span>{text}</span>
+                </button>;
+              })}
             </div>
             <div className="featured-grid">
               {projects.slice(0,4).map(p => <ProjectCard key={p.id} project={p} onOpen={setActiveProject}/>)}
@@ -164,10 +190,11 @@ function App() {
           <div className="container contact-inner">
             <p className="section-label light">06 / CONTACT</p>
             <h2>Let's build intelligent<br/><span>systems.</span></h2>
-            <p className="contact-text">Open to conversations around Applied AI, Industrial AI, machine learning, robotics, and intelligent manufacturing opportunities.</p>
+            <p className="contact-text">Looking for a Werkstudent position (20 h/week, available now), an internship, a Master's thesis or a full-time role in Industrial AI, machine learning or digital production. Based in Bavaria.</p>
             <div className="contact-actions">
-              <a className="button primary" href="mailto:vikramejjagiri08@gmail.com">Get in touch <Mail size={17}/></a>
-              <a className="button ghost" href="https://www.linkedin.com/in/vikramejjagiri" target="_blank" rel="noreferrer"><Linkedin size={17}/> LinkedIn</a>
+              <a className="button primary" href={`mailto:${EMAIL}`}>Get in touch <Mail size={17}/></a>
+              <a className="button ghost" href={LINKEDIN} target="_blank" rel="noreferrer"><Linkedin size={17}/> LinkedIn</a>
+              <a className="button ghost" href={GITHUB} target="_blank" rel="noreferrer"><Github size={17}/> GitHub</a>
             </div>
             <div className="footer-line"><span>© {new Date().getFullYear()} Vikram Ejjagiri</span><span>Applied AI Engineer</span><a href="#home">Back to top ↑</a></div>
           </div>
@@ -197,6 +224,7 @@ function ProjectCard({project,onOpen}){
     <div className="project-card-content">
       <div className="card-top"><span>{project.number}</span><span>{project.category}</span></div>
       <h3>{project.title}</h3><p>{project.description}</p>
+      {project.result && <div className="card-result">{project.result}</div>}
       <div className="card-bottom"><div>{project.tools.slice(0,3).map(t=><span key={t}>{t}</span>)}</div><span className="explore">Explore case study <ArrowUpRight size={16}/></span></div>
     </div>
   </button>
@@ -227,9 +255,10 @@ function ProjectModal({project,onClose}){
       <p className="section-label">{project.number} / {project.category}</p>
       <h2>{project.title}</h2>
       <p className="modal-lead">{project.description}</p>
+      {project.result && <div className="modal-result">Key result: {project.result}</div>}
       <div className="modal-grid">
         <div><h4>OBJECTIVE</h4><p>{project.objective}</p></div>
-        <div><h4>ACHIEVEMENTS</h4>{project.achievements.length ? <ul>{project.achievements.map(x=><li key={x}>{x}</li>)}</ul> : <p>Detailed source material will be added when the original project report becomes available.</p>}</div>
+        {project.achievements.length > 0 && <div><h4>WHAT I BUILT</h4><ul>{project.achievements.map(x=><li key={x}>{x}</li>)}</ul></div>}
       </div>
       {project.tools.length>0 && <><h4>TOOLS USED</h4><div className="modal-tags">{project.tools.map(t=><span key={t}>{t}</span>)}</div></>}
             {project.github && <a className="button primary" href={project.github} target="_blank" rel="noreferrer" style={{marginTop: "1.5rem"}}><Github size={17}/> View code on GitHub</a>}
