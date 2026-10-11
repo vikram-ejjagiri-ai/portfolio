@@ -1,58 +1,60 @@
 import { useEffect, useState } from "react";
 import {
-  ArrowUpRight, BrainCircuit, ChevronRight, Code2, Cpu, Database,
-  Download, Github, Linkedin, Mail, Menu, MoveUpRight, Network,
-  Rocket, X, Eye, Bot, Factory, Sparkles
+  ArrowUpRight, BrainCircuit, ChevronRight, Cpu, Database,
+  Download, Github, Globe, Linkedin, Mail, Menu, MoveUpRight,
+  X, Eye, Bot, Factory
 } from "lucide-react";
-import { projects } from "./data/projects";
+import { projects as projectsEn } from "./data/projects";
+import { projectsDe } from "./data/projects.de";
+import { LANGS, text } from "./i18n";
+
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
 const GITHUB = "https://github.com/vikram-ejjagiri-ai";
 const LINKEDIN = "https://www.linkedin.com/in/vikramejjagiri";
 const EMAIL = "vikramejjagiri08@gmail.com";
 const B1_CERTIFICATE = "german-b1-certificate.pdf";
-const languages = [
-  ["English", "Professional working proficiency", null],
-  ["German", "B1 (telc certificate, 2026)", B1_CERTIFICATE],
-  ["Telugu", "Native", null],
-];
+const PIPELINE_IDS = ["kaizen-factory-stack", "predictive-maintenance", "visual-quality-inspection", "oee-maintenance-copilot"];
+const STORAGE_KEY = "portfolio-lang";
 
-// Each group lists skills that a project on this page demonstrates.
-const skills = {
-  "Machine Learning & Vision": ["Python", "scikit-learn", "PyTorch", "Anomaly Detection (PatchCore)", "Explainable AI (SHAP)", "ONNX / Edge AI", "Pandas", "NumPy"],
-  "Industrial Data & IIoT": ["OPC UA", "MQTT", "Unified Namespace", "PostgreSQL", "SQL", "Grafana", "Power BI", "DAX"],
-  "Manufacturing & Industrial AI": ["OEE (ISO 22400)", "Predictive Maintenance", "Visual Quality Inspection", "MES & CMMS Data", "TPM / SMED", "Industry 4.0"],
-  "LLMs, Tools & Engineering": ["RAG", "Ollama (local LLMs)", "Streamlit", "Git", "Pytest", "Fusion 360", "MSC Adams", "PLC (Basic)", "ROS (Basic)"]
-};
+// Language: ?lang=de in the link wins, then the visitor's earlier choice. null = ask.
+function initialLang() {
+  try {
+    const fromUrl = new URLSearchParams(window.location.search).get("lang");
+    if (LANGS.includes(fromUrl)) return fromUrl;
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (LANGS.includes(saved)) return saved;
+  } catch { /* storage blocked: just ask */ }
+  return null;
+}
 
-// The four Kaizen projects form one pipeline, like a real factory AI stack.
-const pipeline = [
-  ["01", "Collect", "Machine data via OPC UA and MQTT into PostgreSQL", "kaizen-factory-stack"],
-  ["02", "Predict", "Failures before they happen, with explainable alarms", "predictive-maintenance"],
-  ["03", "Inspect", "Defects on camera images, located on a heatmap", "visual-quality-inspection"],
-  ["04", "Improve", "OEE losses and a copilot for maintenance questions", "oee-maintenance-copilot"],
-];
-
-const journey = [
-  ["01", "Mechanical Engineering", "Built a foundation in mechanical design, engineering systems and automation."],
-  ["02", "Robotics & Automation", "Explored robotic systems through SCARA design, simulation and hands-on engineering work."],
-  ["03", "Applied AI", "Moved into machine learning, computer vision, NLP and generative AI."],
-  ["04", "Intelligent Manufacturing", "Focused current studies on applying AI to digital production and Industry 4.0."],
-  ["05", "Kaizen Matrix", "Building an end-to-end industrial AI project series: data platform, predictive maintenance, visual inspection and an OEE copilot."],
-];
+const localize = (p, lang) => (lang === "de" ? { ...p, ...(projectsDe[p.id] || {}) } : p);
 
 function App() {
+  const [lang, setLangState] = useState(initialLang);
   const [menuOpen, setMenuOpen] = useState(false);
   const [filter, setFilter] = useState("All");
-  const [activeProject, setActiveProject] = useState(null);
+  const [activeId, setActiveId] = useState(null);
   const [resumeOpen, setResumeOpen] = useState(false);
+
+  const L = lang || "en";
+  const t = text[L];
+  const projects = projectsEn.map(p => localize(p, L));
+  const activeProject = projects.find(p => p.id === activeId);
   const categories = ["All", ...new Set(projects.map(p => p.category))];
   const filtered = filter === "All" ? projects : projects.filter(p => p.category === filter);
+  const catLabel = (c) => (c === "All" ? t.projects.all : t.categories[c] || c);
 
+  const setLang = (l) => {
+    setLangState(l);
+    try { localStorage.setItem(STORAGE_KEY, l); } catch { /* ignore */ }
+  };
+
+  useEffect(() => { document.documentElement.lang = L; }, [L]);
   useEffect(() => {
-    document.body.style.overflow = (activeProject || resumeOpen) ? "hidden" : "";
+    document.body.style.overflow = (activeProject || resumeOpen || !lang) ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
-  }, [activeProject, resumeOpen]);
+  }, [activeProject, resumeOpen, lang]);
 
   const go = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -65,12 +67,15 @@ function App() {
         <nav className="navbar">
           <button className="brand" onClick={() => go("home")}>VE<span>.</span></button>
           <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-            {["about","projects","skills","journey","contact"].map(x =>
-              <button key={x} onClick={() => go(x)}>{x[0].toUpperCase()+x.slice(1)}</button>
+            {["about", "projects", "skills", "journey", "contact"].map(x =>
+              <button key={x} onClick={() => go(x)}>{t.nav[x]}</button>
             )}
             <a className="nav-icon" href={GITHUB} target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={17}/></a>
             <a className="nav-icon" href={LINKEDIN} target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={17}/></a>
-            <button className="nav-resume" onClick={() => { setResumeOpen(true); setMenuOpen(false); }}>Resume <ArrowUpRight size={15}/></button>
+            <div className="lang-switch" role="group" aria-label="Language">
+              {LANGS.map(l => <button key={l} className={L === l ? "active" : ""} onClick={() => { setLang(l); setMenuOpen(false); }}>{l.toUpperCase()}</button>)}
+            </div>
+            <button className="nav-resume" onClick={() => { setResumeOpen(true); setMenuOpen(false); }}>{t.nav.resume} <ArrowUpRight size={15}/></button>
           </div>
           <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
             {menuOpen ? <X/> : <Menu/>}
@@ -82,43 +87,43 @@ function App() {
         <section id="home" className="hero section-dark">
           <div className="hero-grid" />
           <div className="hero-copy reveal">
-            <div className="status"><span className="status-dot"/> Available now · Werkstudent, internship, thesis & full-time roles</div>
-            <p className="eyebrow">AI • ROBOTICS • COMPUTER VISION • INTELLIGENT MANUFACTURING</p>
-            <h1>Applied AI<br/><em>Engineer</em></h1>
-            <p className="hero-text">M.Eng. student in Applied AI for Digital Production at TH Deggendorf. I build industrial AI end to end: machine data pipelines, predictive maintenance, visual quality inspection and LLM copilots for the shop floor.</p>
+            <div className="status"><span className="status-dot"/> {t.status}</div>
+            <p className="eyebrow">{t.eyebrow}</p>
+            <h1>{t.title1}<br/><em>{t.title2}</em></h1>
+            <p className="hero-text">{t.heroText}</p>
             <div className="hero-actions">
-              <button className="button primary" onClick={() => go("projects")}>View Projects <MoveUpRight size={17}/></button>
-              <button className="button ghost" onClick={() => setResumeOpen(true)}>Download Resume <Download size={17}/></button>
+              <button className="button primary" onClick={() => go("projects")}>{t.viewProjects} <MoveUpRight size={17}/></button>
+              <button className="button ghost" onClick={() => setResumeOpen(true)}>{t.downloadResume} <Download size={17}/></button>
               <a className="button ghost" href={GITHUB} target="_blank" rel="noreferrer"><Github size={17}/> GitHub</a>
             </div>
-            <div className="hero-meta"><span>Cham, Bavaria · Germany</span><span>M.Eng. · TH Deggendorf</span><span>English · German (B1) · Telugu</span></div>
+            <div className="hero-meta">{t.meta.map(m => <span key={m}>{m}</span>)}</div>
           </div>
           <EngineeringNetwork/>
-          <div className="scroll-hint">SCROLL TO EXPLORE <span>↓</span></div>
+          <div className="scroll-hint">{t.scroll} <span>↓</span></div>
         </section>
 
         <section id="about" className="section about">
           <div className="container about-grid">
             <div className="portrait-card">
               <Portrait/>
-              <div className="portrait-caption"><span>APPLIED AI</span><span>ENGINEERING × INTELLIGENCE</span></div>
+              <div className="portrait-caption"><span>{t.about.caption[0]}</span><span>{t.about.caption[1]}</span></div>
             </div>
             <div className="about-copy">
-              <p className="section-label">01 / ABOUT</p>
-              <h2>From engineering<br/><span>to applied AI.</span></h2>
-              <p>My journey started with mechanical engineering, where I developed a foundation in design, automation, robotics, and engineering systems. Through projects involving robotic systems and intelligent perception, I became increasingly interested in how software intelligence can extend what machines can do.</p>
-              <p>I am currently pursuing a Master's in <strong>Applied AI for Digital Production Management</strong> at Technische Hochschule Deggendorf, focusing on practical AI for industrial and production challenges.</p>
-              <p>Today, my work spans <strong>AI/ML, computer vision, NLP, generative AI, robotics, and intelligent manufacturing</strong>.</p>
+              <p className="section-label">{t.about.label}</p>
+              <h2>{t.about.h1}<br/><span>{t.about.h2}</span></h2>
+              <p>{t.about.p1}</p>
+              <p>{t.about.p2a}<strong>{t.about.p2b}</strong>{t.about.p2c}</p>
+              <p>{t.about.p3a}<strong>{t.about.p3b}</strong>{t.about.p3c}</p>
               <div className="about-facts">
-                <div><strong>2.3</strong><span>Current Master's grade<br/>(German scale, 1.0 = best)</span></div>
-                <div><strong>8.17 / 10</strong><span>Bachelor's CGPA</span></div>
-                <div><strong>9.52 / 10</strong><span>Diploma CGPA</span></div>
+                <div><strong>{L === "de" ? "2,3" : "2.3"}</strong><span>{t.about.grade}<br/>{t.about.gradeNote}</span></div>
+                <div><strong>{L === "de" ? "8,17 / 10" : "8.17 / 10"}</strong><span>{t.about.bachelor}</span></div>
+                <div><strong>{L === "de" ? "9,52 / 10" : "9.52 / 10"}</strong><span>{t.about.diploma}</span></div>
               </div>
               <div className="languages">
-                <h4>Languages</h4>
-                {languages.map(([name, level, cert]) => <div className="language-row" key={name}>
+                <h4>{t.languagesTitle}</h4>
+                {t.languages.map(([name, level, cert]) => <div className="language-row" key={name}>
                   <strong>{name}</strong><span>{level}</span>
-                  {cert && <a href={asset(cert)} target="_blank" rel="noreferrer" download>View certificate <Download size={14}/></a>}
+                  {cert && <a href={asset(B1_CERTIFICATE)} target="_blank" rel="noreferrer">{t.viewCertificate} <Download size={14}/></a>}
                 </div>)}
               </div>
             </div>
@@ -128,26 +133,26 @@ function App() {
         <section id="projects" className="section section-dark projects-section">
           <div className="container">
             <div className="section-head">
-              <div><p className="section-label light">02 / PROJECTS</p><h2>Selected work<span>.</span></h2></div>
-              <p>Four connected industrial AI projects, each with code, tests, documentation and honest evaluation on GitHub.</p>
+              <div><p className="section-label light">{t.projects.label}</p><h2>{t.projects.title}<span>.</span></h2></div>
+              <p>{t.projects.intro}</p>
             </div>
             <div className="pipeline">
-              {pipeline.map(([n, verb, text, id]) => {
-                const p = projects.find(x => x.id === id);
-                return <button className="pipeline-step" key={id} onClick={() => p && setActiveProject(p)}>
-                  <span className="pipeline-num">{n}</span><strong>{verb}</strong><span>{text}</span>
+              {PIPELINE_IDS.map((id, i) => {
+                const [verb, desc] = t.projects.pipeline[i];
+                return <button className="pipeline-step" key={id} onClick={() => setActiveId(id)}>
+                  <span className="pipeline-num">0{i + 1}</span><strong>{verb}</strong><span>{desc}</span>
                 </button>;
               })}
             </div>
             <div className="featured-grid">
-              {projects.slice(0,4).map(p => <ProjectCard key={p.id} project={p} onOpen={setActiveProject}/>)}
+              {projects.slice(0, 4).map(p => <ProjectCard key={p.id} project={p} t={t} catLabel={catLabel} onOpen={() => setActiveId(p.id)}/>)}
             </div>
             <div className="all-projects">
-              <p className="section-label light">EXPLORE ALL</p>
-              <div className="filters">{categories.map(c => <button className={filter===c ? "active":""} key={c} onClick={()=>setFilter(c)}>{c}</button>)}</div>
+              <p className="section-label light">{t.projects.exploreAll}</p>
+              <div className="filters">{categories.map(c => <button className={filter === c ? "active" : ""} key={c} onClick={() => setFilter(c)}>{catLabel(c)}</button>)}</div>
               <div className="project-list">
-                {filtered.map(p => <button className="project-row" key={p.id} onClick={()=>setActiveProject(p)}>
-                  <span className="row-number">{p.number}</span><span className="row-title">{p.title}</span><span className="row-category">{p.category}</span><ChevronRight/>
+                {filtered.map(p => <button className="project-row" key={p.id} onClick={() => setActiveId(p.id)}>
+                  <span className="row-number">{p.number}</span><span className="row-title">{p.title}</span><span className="row-category">{catLabel(p.category)}</span><ChevronRight/>
                 </button>)}
               </div>
             </div>
@@ -156,34 +161,31 @@ function App() {
 
         <section id="skills" className="section skills-section">
           <div className="container">
-            <p className="section-label">03 / CAPABILITIES</p>
-            <div className="skills-intro"><h2>A toolkit for<br/><span>real-world AI.</span></h2><p>I combine software intelligence with an engineering mindset — from data and models to robotics and production systems.</p></div>
+            <p className="section-label">{t.skills.label}</p>
+            <div className="skills-intro"><h2>{t.skills.h1}<br/><span>{t.skills.h2}</span></h2><p>{t.skills.intro}</p></div>
             <div className="skills-grid">
-              {Object.entries(skills).map(([group, items], i) => <div className="skill-card" key={group}>
-                <div className="skill-icon">
-  {(() => {
-    const Icon = [BrainCircuit, Database, Factory, Bot][i];
-    return <Icon size={22} />;
-  })()}
-</div>
-                <h3>{group}</h3>
-                <div className="skill-tags">{items.map(x=><span key={x}>{x}</span>)}</div>
-              </div>)}
+              {Object.entries(t.skills.groups).map(([group, items], i) => {
+                const Icon = [BrainCircuit, Database, Factory, Bot][i];
+                return <div className="skill-card" key={group}>
+                  <div className="skill-icon"><Icon size={22}/></div>
+                  <h3>{group}</h3>
+                  <div className="skill-tags">{items.map(x => <span key={x}>{x}</span>)}</div>
+                </div>;
+              })}
             </div>
           </div>
         </section>
 
         <section id="journey" className="section journey-section section-dark">
           <div className="container">
-            <p className="section-label light">04 / JOURNEY</p>
-            <div className="journey-head"><h2>Engineering roots.<br/><span>AI direction.</span></h2><p>My academic path connects mechanical engineering and robotics with current work in applied AI and digital production.</p></div>
+            <p className="section-label light">{t.journey.label}</p>
+            <div className="journey-head"><h2>{t.journey.h1}<br/><span>{t.journey.h2}</span></h2><p>{t.journey.intro}</p></div>
             <div className="journey-list">
-              {journey.map(([n,title,text]) => <div className="journey-item" key={n}><span>{n}</span><div><h3>{title}</h3><p>{text}</p></div><ChevronRight/></div>)}
+              {t.journey.items.map(([title, desc], i) => <div className="journey-item" key={title}><span>0{i + 1}</span><div><h3>{title}</h3><p>{desc}</p></div><ChevronRight/></div>)}
             </div>
             <div className="education">
-              <div><span>MASTER'S</span><h3>Applied AI for Digital Production Management</h3><p>Technische Hochschule Deggendorf · Germany</p><b>Current grade: 2.3 / 4.0</b></div>
-              <div><span>BACHELOR'S</span><h3>Mechanical Engineering — Honors in Robotics</h3><p>Vasavi College of Engineering · Hyderabad, India</p><b>CGPA: 8.17 / 10</b></div>
-              <div><span>DIPLOMA</span><h3>Mechanical Engineering</h3><p>Government Polytechnic · India</p><b>CGPA: 9.52 / 10</b></div>
+              {t.journey.education.map(([kind, title, where, grade]) =>
+                <div key={kind}><span>{kind}</span><h3>{title}</h3><p>{where}</p><b>{grade}</b></div>)}
             </div>
           </div>
         </section>
@@ -191,36 +193,48 @@ function App() {
         <section className="section research-section">
           <div className="container">
             <div className="research-card">
-              <div><p className="section-label">05 / RESEARCH INTERESTS</p><h2>Where I want to<br/><span>go deeper.</span></h2></div>
-              <div className="interest-cloud">
-                {["Applied Artificial Intelligence","Industrial AI","Intelligent Manufacturing","Computer Vision","Robotics & Autonomous Systems","Predictive Maintenance","Generative AI","Human-AI Collaboration","Digital Twins"].map(x=><span key={x}>{x}</span>)}
-              </div>
+              <div><p className="section-label">{t.research.label}</p><h2>{t.research.h1}<br/><span>{t.research.h2}</span></h2></div>
+              <div className="interest-cloud">{t.research.items.map(x => <span key={x}>{x}</span>)}</div>
             </div>
           </div>
         </section>
 
         <section id="contact" className="contact section-dark">
           <div className="container contact-inner">
-            <p className="section-label light">06 / CONTACT</p>
-            <h2>Let's build intelligent<br/><span>systems.</span></h2>
-            <p className="contact-text">Looking for a Werkstudent position, an internship, a Master's thesis or a full-time role in Industrial AI, machine learning or digital production. Available now, based in Bavaria.</p>
+            <p className="section-label light">{t.contact.label}</p>
+            <h2>{t.contact.h1}<br/><span>{t.contact.h2}</span></h2>
+            <p className="contact-text">{t.contact.text}</p>
             <div className="contact-actions">
-              <a className="button primary" href={`mailto:${EMAIL}`}>Get in touch <Mail size={17}/></a>
+              <a className="button primary" href={`mailto:${EMAIL}`}>{t.contact.cta} <Mail size={17}/></a>
               <a className="button ghost" href={LINKEDIN} target="_blank" rel="noreferrer"><Linkedin size={17}/> LinkedIn</a>
               <a className="button ghost" href={GITHUB} target="_blank" rel="noreferrer"><Github size={17}/> GitHub</a>
             </div>
-            <div className="footer-line"><span>© {new Date().getFullYear()} Vikram Ejjagiri</span><span>Applied AI Engineer</span><a href="#home">Back to top ↑</a></div>
+            <div className="footer-line"><span>© {new Date().getFullYear()} Vikram Ejjagiri</span><span>{t.contact.role}</span><a href="#home">{t.contact.top}</a></div>
           </div>
         </section>
       </main>
 
-      {activeProject && <ProjectModal project={activeProject} onClose={()=>setActiveProject(null)}/>}
-      {resumeOpen && <ResumeChooser onClose={() => setResumeOpen(false)}/>}
+      {activeProject && <ProjectModal project={activeProject} t={t} catLabel={catLabel} onClose={() => setActiveId(null)}/>}
+      {resumeOpen && <ResumeChooser t={t} lang={L} onClose={() => setResumeOpen(false)}/>}
+      {!lang && <LanguageGate onChoose={setLang}/>}
     </div>
   );
 }
 
-function Portrait(){
+function LanguageGate({ onChoose }) {
+  return <div className="modal-backdrop lang-gate">
+    <div className="resume-chooser" role="dialog" aria-label="Choose language / Sprache wählen">
+      <div className="gate-icon"><Globe size={22}/></div>
+      <h3>Choose your language<br/><span>Sprache wählen</span></h3>
+      <div className="resume-options">
+        <button className="resume-option" onClick={() => onChoose("en")}><strong>English</strong><span>Continue in English</span><ArrowUpRight size={18}/></button>
+        <button className="resume-option" onClick={() => onChoose("de")}><strong>Deutsch</strong><span>Auf Deutsch weiter</span><ArrowUpRight size={18}/></button>
+      </div>
+    </div>
+  </div>;
+}
+
+function Portrait() {
   const [failed, setFailed] = useState(false);
   if (failed) return <div className="portrait-placeholder"><span>VE</span></div>;
   return <div className="portrait-photo">
@@ -228,26 +242,26 @@ function Portrait(){
   </div>;
 }
 
-function ResumeChooser({onClose}){
+function ResumeChooser({ t, lang, onClose }) {
   const options = [
-    ["English", "CV in English", "resume-en.pdf"],
-    ["Deutsch", "Lebenslauf auf Deutsch", "resume-de.pdf"],
-  ];
+    ["en", "English", "CV in English", "resume-en.pdf"],
+    ["de", "Deutsch", "Lebenslauf auf Deutsch", "resume-de.pdf"],
+  ].sort((a, b) => (a[0] === lang ? -1 : b[0] === lang ? 1 : 0));   // current language first
   return <div className="modal-backdrop" onMouseDown={e => e.target === e.currentTarget && onClose()}>
-    <div className="resume-chooser" role="dialog" aria-label="Choose resume language">
+    <div className="resume-chooser" role="dialog" aria-label={t.resume.question}>
       <button className="modal-close" onClick={onClose} aria-label="Close"><X/></button>
-      <p className="section-label">RESUME</p>
-      <h3>Which language would you like?</h3>
+      <p className="section-label">{t.resume.label}</p>
+      <h3>{t.resume.question}</h3>
       <div className="resume-options">
-        {options.map(([lang, sub, file]) => <a key={file} className="resume-option" href={asset(file)} target="_blank" rel="noreferrer" onClick={onClose}>
-          <strong>{lang}</strong><span>{sub}</span><Download size={18}/>
+        {options.map(([, name, sub, file]) => <a key={file} className="resume-option" href={asset(file)} target="_blank" rel="noreferrer" onClick={onClose}>
+          <strong>{name}</strong><span>{sub}</span><Download size={18}/>
         </a>)}
       </div>
     </div>
   </div>;
 }
 
-function EngineeringNetwork(){
+function EngineeringNetwork() {
   return <div className="network-wrap" aria-hidden="true">
     <div className="network-orbit orbit-one"/><div className="network-orbit orbit-two"/>
     <div className="network-core"><BrainCircuit size={44}/><span>AI</span></div>
@@ -256,55 +270,53 @@ function EngineeringNetwork(){
     <div className="node node-c"><Factory/><span>Industry</span></div>
     <div className="node node-d"><Cpu/><span>ML</span></div>
     <div className="pulse-line line-a"/><div className="pulse-line line-b"/><div className="pulse-line line-c"/><div className="pulse-line line-d"/>
-  </div>
+  </div>;
 }
 
-function ProjectCard({project,onOpen}){
-  return <button className="project-card" onClick={()=>onOpen(project)}>
+function ProjectCard({ project, t, catLabel, onOpen }) {
+  return <button className="project-card" onClick={onOpen}>
     <ProjectVisual project={project}/>
     <div className="project-card-content">
-      <div className="card-top"><span>{project.number}</span><span>{project.category}</span></div>
+      <div className="card-top"><span>{project.number}</span><span>{catLabel(project.category)}</span></div>
       <h3>{project.title}</h3><p>{project.description}</p>
       {project.result && <div className="card-result">{project.result}</div>}
-      <div className="card-bottom"><div>{project.tools.slice(0,3).map(t=><span key={t}>{t}</span>)}</div><span className="explore">Explore case study <ArrowUpRight size={16}/></span></div>
+      <div className="card-bottom"><div>{project.tools.slice(0, 3).map(x => <span key={x}>{x}</span>)}</div><span className="explore">{t.projects.explore} <ArrowUpRight size={16}/></span></div>
     </div>
-  </button>
+  </button>;
 }
 
-function ProjectVisual({project}){
+function ProjectVisual({ project }) {
   const type = project.visual;
   if (project.image) {
     return <div className={`project-visual ${type}`}>
       <img src={asset(project.image)} alt={`${project.title} screenshot`}
-        style={{width: "100%", height: "100%", objectFit: "cover", display: "block"}}/>
-    </div>
+        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}/>
+    </div>;
   }
   return <div className={`project-visual ${type}`}>
-    {type==="sensor" && <><div className="chart"><i/><i/><i/><i/><i/><i/><i/><i/></div><div className="visual-label">MACHINE HEALTH / LIVE</div><div className="visual-number">87<span>%</span></div></>}
-    {type==="nlp" && <><div className="terminal"><span>&gt; incident.detect()</span><span>classification: bearing fault</span><span>severity: high</span><span>recommendation: inspect</span></div><div className="visual-label">AI INCIDENT ANALYSIS</div></>}
-    {type==="genai" && <><div className="gen-shape"/><div className="prompt-box">prompt → engineering concept</div><div className="visual-label">GENERATIVE CONCEPT STUDIO</div></>}
-    {type==="robot" && <><div className="robot-arm"><span/><span/><span/><b/></div><div className="workspace"/><div className="visual-label">MULTI-PLANE ROBOTICS</div></>}
-    {type==="ornithopter" && <><div className="wing"/><div className="visual-label">HONORS THESIS</div></>}
-  </div>
+    {type === "sensor" && <><div className="chart"><i/><i/><i/><i/><i/><i/><i/><i/></div><div className="visual-label">MACHINE HEALTH / LIVE</div><div className="visual-number">87<span>%</span></div></>}
+    {type === "robot" && <><div className="robot-arm"><span/><span/><span/><b/></div><div className="workspace"/><div className="visual-label">MULTI-PLANE ROBOTICS</div></>}
+    {type === "ornithopter" && <><div className="wing"/><div className="visual-label">HONORS THESIS</div></>}
+  </div>;
 }
 
-function ProjectModal({project,onClose}){
-  return <div className="modal-backdrop" onMouseDown={e=>e.target===e.currentTarget&&onClose()}>
+function ProjectModal({ project, t, catLabel, onClose }) {
+  return <div className="modal-backdrop" onMouseDown={e => e.target === e.currentTarget && onClose()}>
     <article className="modal">
       <button className="modal-close" onClick={onClose}><X/></button>
       <div className="modal-visual"><ProjectVisual project={project}/></div>
-      <p className="section-label">{project.number} / {project.category}</p>
+      <p className="section-label">{project.number} / {catLabel(project.category)}</p>
       <h2>{project.title}</h2>
       <p className="modal-lead">{project.description}</p>
-      {project.result && <div className="modal-result">Key result: {project.result}</div>}
+      {project.result && <div className="modal-result">{t.projects.keyResult}: {project.result}</div>}
       <div className="modal-grid">
-        <div><h4>OBJECTIVE</h4><p>{project.objective}</p></div>
-        {project.achievements.length > 0 && <div><h4>WHAT I BUILT</h4><ul>{project.achievements.map(x=><li key={x}>{x}</li>)}</ul></div>}
+        <div><h4>{t.projects.objective}</h4><p>{project.objective}</p></div>
+        {project.achievements.length > 0 && <div><h4>{t.projects.built}</h4><ul>{project.achievements.map(x => <li key={x}>{x}</li>)}</ul></div>}
       </div>
-      {project.tools.length>0 && <><h4>TOOLS USED</h4><div className="modal-tags">{project.tools.map(t=><span key={t}>{t}</span>)}</div></>}
-            {project.github && <a className="button primary" href={project.github} target="_blank" rel="noreferrer" style={{marginTop: "1.5rem"}}><Github size={17}/> View code on GitHub</a>}
+      {project.tools.length > 0 && <><h4>{t.projects.tools}</h4><div className="modal-tags">{project.tools.map(x => <span key={x}>{x}</span>)}</div></>}
+      {project.github && <a className="button primary" href={project.github} target="_blank" rel="noreferrer" style={{ marginTop: "1.5rem" }}><Github size={17}/> {t.projects.code}</a>}
     </article>
-  </div>
+  </div>;
 }
 
 export default App;
