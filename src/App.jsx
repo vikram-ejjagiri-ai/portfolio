@@ -10,6 +10,12 @@ const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 const GITHUB = "https://github.com/vikram-ejjagiri-ai";
 const LINKEDIN = "https://www.linkedin.com/in/vikramejjagiri";
 const EMAIL = "vikramejjagiri08@gmail.com";
+const B1_CERTIFICATE = "german-b1-certificate.pdf";
+const languages = [
+  ["English", "Professional working proficiency", null],
+  ["German", "B1 (telc certificate, 2026)", B1_CERTIFICATE],
+  ["Telugu", "Native", null],
+];
 
 // Each group lists skills that a project on this page demonstrates.
 const skills = {
@@ -39,13 +45,14 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [filter, setFilter] = useState("All");
   const [activeProject, setActiveProject] = useState(null);
+  const [resumeOpen, setResumeOpen] = useState(false);
   const categories = ["All", ...new Set(projects.map(p => p.category))];
   const filtered = filter === "All" ? projects : projects.filter(p => p.category === filter);
 
   useEffect(() => {
-    document.body.style.overflow = activeProject ? "hidden" : "";
+    document.body.style.overflow = (activeProject || resumeOpen) ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
-  }, [activeProject]);
+  }, [activeProject, resumeOpen]);
 
   const go = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -63,7 +70,7 @@ function App() {
             )}
             <a className="nav-icon" href={GITHUB} target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={17}/></a>
             <a className="nav-icon" href={LINKEDIN} target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={17}/></a>
-            <a className="nav-resume" href={asset("resume.pdf")} target="_blank" rel="noreferrer">Resume <ArrowUpRight size={15}/></a>
+            <button className="nav-resume" onClick={() => { setResumeOpen(true); setMenuOpen(false); }}>Resume <ArrowUpRight size={15}/></button>
           </div>
           <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
             {menuOpen ? <X/> : <Menu/>}
@@ -75,16 +82,16 @@ function App() {
         <section id="home" className="hero section-dark">
           <div className="hero-grid" />
           <div className="hero-copy reveal">
-            <div className="status"><span className="status-dot"/> Available now · Werkstudent (20 h/week), internship, thesis & full-time roles</div>
+            <div className="status"><span className="status-dot"/> Available now · Werkstudent, internship, thesis & full-time roles</div>
             <p className="eyebrow">AI • ROBOTICS • COMPUTER VISION • INTELLIGENT MANUFACTURING</p>
             <h1>Applied AI<br/><em>Engineer</em></h1>
             <p className="hero-text">M.Eng. student in Applied AI for Digital Production at TH Deggendorf. I build industrial AI end to end: machine data pipelines, predictive maintenance, visual quality inspection and LLM copilots for the shop floor.</p>
             <div className="hero-actions">
               <button className="button primary" onClick={() => go("projects")}>View Projects <MoveUpRight size={17}/></button>
-              <a className="button ghost" href={asset("resume.pdf")} target="_blank" rel="noreferrer">Download Resume <Download size={17}/></a>
+              <button className="button ghost" onClick={() => setResumeOpen(true)}>Download Resume <Download size={17}/></button>
               <a className="button ghost" href={GITHUB} target="_blank" rel="noreferrer"><Github size={17}/> GitHub</a>
             </div>
-            <div className="hero-meta"><span>Cham, Bavaria · Germany</span><span>M.Eng. · TH Deggendorf</span><span>English · German (B1)</span></div>
+            <div className="hero-meta"><span>Cham, Bavaria · Germany</span><span>M.Eng. · TH Deggendorf</span><span>English · German (B1) · Telugu</span></div>
           </div>
           <EngineeringNetwork/>
           <div className="scroll-hint">SCROLL TO EXPLORE <span>↓</span></div>
@@ -93,7 +100,7 @@ function App() {
         <section id="about" className="section about">
           <div className="container about-grid">
             <div className="portrait-card">
-              <div className="portrait-placeholder"><span>VE</span></div>
+              <Portrait/>
               <div className="portrait-caption"><span>APPLIED AI</span><span>ENGINEERING × INTELLIGENCE</span></div>
             </div>
             <div className="about-copy">
@@ -106,7 +113,13 @@ function App() {
                 <div><strong>2.3</strong><span>Current Master's grade<br/>(German scale, 1.0 = best)</span></div>
                 <div><strong>8.17 / 10</strong><span>Bachelor's CGPA</span></div>
                 <div><strong>9.52 / 10</strong><span>Diploma CGPA</span></div>
-                <div><strong>B1</strong><span>German · English<br/>professional</span></div>
+              </div>
+              <div className="languages">
+                <h4>Languages</h4>
+                {languages.map(([name, level, cert]) => <div className="language-row" key={name}>
+                  <strong>{name}</strong><span>{level}</span>
+                  {cert && <a href={asset(cert)} target="_blank" rel="noreferrer" download>View certificate <Download size={14}/></a>}
+                </div>)}
               </div>
             </div>
           </div>
@@ -190,7 +203,7 @@ function App() {
           <div className="container contact-inner">
             <p className="section-label light">06 / CONTACT</p>
             <h2>Let's build intelligent<br/><span>systems.</span></h2>
-            <p className="contact-text">Looking for a Werkstudent position (20 h/week, available now), an internship, a Master's thesis or a full-time role in Industrial AI, machine learning or digital production. Based in Bavaria.</p>
+            <p className="contact-text">Looking for a Werkstudent position, an internship, a Master's thesis or a full-time role in Industrial AI, machine learning or digital production. Available now, based in Bavaria.</p>
             <div className="contact-actions">
               <a className="button primary" href={`mailto:${EMAIL}`}>Get in touch <Mail size={17}/></a>
               <a className="button ghost" href={LINKEDIN} target="_blank" rel="noreferrer"><Linkedin size={17}/> LinkedIn</a>
@@ -202,8 +215,36 @@ function App() {
       </main>
 
       {activeProject && <ProjectModal project={activeProject} onClose={()=>setActiveProject(null)}/>}
+      {resumeOpen && <ResumeChooser onClose={() => setResumeOpen(false)}/>}
     </div>
   );
+}
+
+function Portrait(){
+  const [failed, setFailed] = useState(false);
+  if (failed) return <div className="portrait-placeholder"><span>VE</span></div>;
+  return <div className="portrait-photo">
+    <img src={asset("photo.jpg")} alt="Vikram Ejjagiri" onError={() => setFailed(true)}/>
+  </div>;
+}
+
+function ResumeChooser({onClose}){
+  const options = [
+    ["English", "CV in English", "resume-en.pdf"],
+    ["Deutsch", "Lebenslauf auf Deutsch", "resume-de.pdf"],
+  ];
+  return <div className="modal-backdrop" onMouseDown={e => e.target === e.currentTarget && onClose()}>
+    <div className="resume-chooser" role="dialog" aria-label="Choose resume language">
+      <button className="modal-close" onClick={onClose} aria-label="Close"><X/></button>
+      <p className="section-label">RESUME</p>
+      <h3>Which language would you like?</h3>
+      <div className="resume-options">
+        {options.map(([lang, sub, file]) => <a key={file} className="resume-option" href={asset(file)} target="_blank" rel="noreferrer" onClick={onClose}>
+          <strong>{lang}</strong><span>{sub}</span><Download size={18}/>
+        </a>)}
+      </div>
+    </div>
+  </div>;
 }
 
 function EngineeringNetwork(){
