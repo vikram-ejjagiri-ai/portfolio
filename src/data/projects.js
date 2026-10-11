@@ -48,25 +48,27 @@ export const projects = [
     github: "https://github.com/vikram-ejjagiri-ai/kaizen-machine-failure-prediction"
   },
   {
-    id: "incident-assistant",
+    id: "visual-quality-inspection",
     number: "03",
-    title: "Intelligent Manufacturing Incident Assistant",
-    shortTitle: "Incident Assistant",
+    title: "AI Visual Quality Inspection",
+    shortTitle: "Visual Inspection",
     category: "Industrial AI",
-    tags: ["NLP", "Transformers", "Decision Support"],
+    tags: ["Computer Vision", "Anomaly Detection", "Edge AI"],
     description:
-      "An AI-powered incident analysis pipeline for classifying manufacturing issues, assessing severity, and supporting operational decisions.",
+      "Detects and localizes defects on industrial parts from camera images, trained on defect-free parts only, with an operator review screen and edge deployment.",
     objective:
-      "Develop an AI-powered manufacturing incident analysis system for intelligent issue classification and operational decision support in smart-factory environments.",
+      "Automate visual quality inspection where defects are rare and unpredictable: flag defective parts, show where the defect is, and keep a human in the loop.",
     achievements: [
-      "Developed an NLP-based incident analysis pipeline for manufacturing incidents.",
-      "Automatically categorized incidents and assessed severity levels.",
-      "Generated engineering recommendations using transformer-based models.",
-      "Simulated AI-assisted production-support workflows for Industry 4.0 manufacturing systems.",
-      "Implemented intelligent incident interpretation using GPU-accelerated inference pipelines."
+      "Implemented PatchCore anomaly detection from scratch in PyTorch on the MVTec AD benchmark, using only defect-free training images.",
+      "Reached an image AUROC of ___ (vs. ___ for a global-feature baseline) and a pixel AUROC of ___ for defect localization.",
+      "Chose the decision threshold by business cost on a separate calibration set: caught ___ of ___ defects on unseen images while rejecting ___ good parts.",
+      "Built a Streamlit operator review screen with anomaly heatmaps, confirm/overrule decisions and an audit log.",
+      "Exported the model to ONNX and benchmarked it for edge deployment: ___ ms per image on GPU, ___ ms on CPU."
     ],
-    tools: ["Python", "PyTorch", "Hugging Face Transformers", "NLP", "Pandas"],
-    visual: "nlp"
+    tools: ["Python", "PyTorch", "ONNX Runtime", "Streamlit", "scikit-learn", "Pytest"],
+    visual: "sensor",
+    image: "projects/visual-quality-inspection.png",
+    github: "https://github.com/vikram-ejjagiri-ai/kaizen-visual-quality-inspection"
   },
   {
     id: "generative-engineering",
