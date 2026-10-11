@@ -71,26 +71,28 @@ export const projects = [
     image: "projects/visual-quality-inspection.png",
     github: "https://github.com/vikram-ejjagiri-ai/kaizen-visual-quality-inspection"
   },
-  {
-    id: "generative-engineering",
+    {
+    id: "oee-maintenance-copilot",
     number: "04",
-    title: "Generative Engineering Concept Studio",
-    shortTitle: "Generative Engineering",
-    category: "Generative AI",
-    tags: ["Stable Diffusion", "Engineering Design", "GenAI"],
+    title: "OEE Dashboard + Maintenance Copilot",
+    shortTitle: "OEE + Copilot",
+    category: "Industrial AI",
+    tags: ["OEE", "LLM / RAG", "Manufacturing Analytics"],
     description:
-      "A prompt-driven generative AI workflow for rapid engineering concept exploration and industrial product visualization.",
+      "An OEE dashboard that shows where production time is lost, and an on-premise maintenance copilot that answers shop-floor questions from MES data, machine manuals and work orders.",
     objective:
-      "Develop an AI-powered engineering concept generation system for industrial product ideation and visualization using diffusion-based generative AI models.",
+      "Make losses visible per machine, shift and week, and give technicians fast, sourced answers about alarms, procedures and past repairs without sending plant data to the cloud.",
     achievements: [
-      "Developed a prompt-driven engineering concept generation pipeline.",
-      "Produced engineering-inspired design concepts using Stable Diffusion.",
-      "Implemented GPU-accelerated inference workflows.",
-      "Automated image generation for rapid concept exploration.",
-      "Demonstrated AI-assisted engineering ideation for product development and industrial design."
+      "Built an ISO 22400 OEE engine with data checks that caught duplicate MES records and a wrong product booking; KPI numbers are verified against an independent calculation.",
+      "Dashboard revealed a plant OEE of 76.8 %, speed loss and changeovers as the biggest losses, and night-shift die changes taking 73 min instead of 40 min.",
+      "Built a RAG copilot with tool use: the OEE engine supplies every number, hybrid search (BM25 + embeddings) finds manual sections and work orders, and a local LLM (Qwen 2.5 7B via Ollama) writes the answer.",
+      "Hybrid search reached 91.7 % Hit@3 (vs. 86.1 % for keyword search); 95.9 % end-to-end pass rate on 49 evaluation questions, including 100 % on safety refusals, off-topic questions and KPI accuracy.",
+      "Added guardrails: refuses to explain how to bypass safety devices, says 'not found' instead of guessing, and flags any number that cannot be traced to the plant data."
     ],
-    tools: ["Python", "PyTorch", "Stable Diffusion", "Hugging Face Diffusers", "CUDA", "Gradio", "Prompt Engineering"],
-    visual: "genai"
+    tools: ["Python", "pandas", "Streamlit", "Plotly", "Ollama", "RAG", "Pytest"],
+    visual: "sensor",
+    image: "projects/oee-maintenance-copilot.png",
+    github: "https://github.com/vikram-ejjagiri-ai/kaizen-oee-maintenance-copilot"
   },
   {
     id: "scara",
