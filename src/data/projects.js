@@ -47,7 +47,7 @@ export const projects = [
     image: "projects/predictive-maintenance.png",
     github: "https://github.com/vikram-ejjagiri-ai/kaizen-machine-failure-prediction"
   },
-  {
+    {
     id: "visual-quality-inspection",
     number: "03",
     title: "AI Visual Quality Inspection",
@@ -59,11 +59,12 @@ export const projects = [
     objective:
       "Automate visual quality inspection where defects are rare and unpredictable: flag defective parts, show where the defect is, and keep a human in the loop.",
     achievements: [
-      "Implemented PatchCore anomaly detection from scratch in PyTorch on the MVTec AD benchmark, using only defect-free training images.",
-      "Reached an image AUROC of ___ (vs. ___ for a global-feature baseline) and a pixel AUROC of ___ for defect localization.",
-      "Chose the decision threshold by business cost on a separate calibration set: caught ___ of ___ defects on unseen images while rejecting ___ good parts.",
-      "Built a Streamlit operator review screen with anomaly heatmaps, confirm/overrule decisions and an audit log.",
-      "Exported the model to ONNX and benchmarked it for edge deployment: ___ ms per image on GPU, ___ ms on CPU."
+      "Implemented PatchCore anomaly detection from scratch in PyTorch on the MVTec AD benchmark (metal nut), learning only from 220 defect-free images.",
+      "Reached an image AUROC of 1.000 (vs. 0.828 for a global-feature baseline) and a pixel AUROC of 0.989 for defect localization.",
+      "Chose the reject threshold by business cost on a separate calibration set: on unseen images it caught 46 of 47 defects with zero good parts rejected.",
+      "Generated anomaly heatmaps showing where each defect is, including analysis of the missed defect.",
+      "Built a Streamlit operator review screen to confirm or overrule AI decisions, with an audit log and overrule rate.",
+      "Exported the model to ONNX (verified against PyTorch) and benchmarked about 120 ms per image on a laptop CPU."
     ],
     tools: ["Python", "PyTorch", "ONNX Runtime", "Streamlit", "scikit-learn", "Pytest"],
     visual: "sensor",
