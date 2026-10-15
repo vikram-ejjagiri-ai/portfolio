@@ -16,13 +16,9 @@ npm run dev
 
 5. Open the local URL shown by Vite.
 
-## Add your resume
+## Resume
 
-Copy your final CV PDF into:
-
-`public/resume.pdf`
-
-The current project package includes a copy of the uploaded CV as `resume.pdf`.
+`public/resume-en.pdf` and `public/resume-de.pdf` (public versions without address and phone). The Resume button asks the visitor which language they want.
 
 ## Edit project content
 
@@ -44,6 +40,9 @@ The production site is created in `dist/`.
 
 You can deploy the `dist` folder using Vercel, Netlify, GitHub Pages, or another static host.
 
-## Important
+## Project evidence
 
-The visual graphics currently used for projects are abstract technical placeholders. Replace them with real project screenshots/diagrams when the original files become available. Do not add performance metrics unless you can verify them from the project.
+- The Industrial AI projects show real screenshots from the projects (`public/projects/`): Grafana dashboard, EDA figures, anomaly heatmaps and the OEE dashboard. The production digitalization platform shows an architecture diagram; replace it with a dashboard screenshot when available.
+- `src/data/evidence.js` holds each project's validation status, architecture flow and limitations (EN/DE). Labels say exactly what was tested: simulated data, public dataset, local run, and what is not yet validated (e.g. real hardware). Update a label only when it becomes true.
+- `src/data/evidence.js` also holds the Master's curriculum section, taken from the TH Deggendorf module handbook.
+- Only report metrics that come from the project's own evaluation output.

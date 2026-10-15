@@ -5,7 +5,7 @@ export const LANGS = ["en", "de"];
 
 export const text = {
   en: {
-    nav: { about: "About", projects: "Projects", skills: "Skills", journey: "Journey", contact: "Contact", resume: "Resume" },
+    nav: { about: "About", projects: "Projects", skills: "Skills", journey: "Journey", studies: "Studies", contact: "Contact", resume: "Resume" },
     status: "Available now · Werkstudent, internship, thesis & full-time roles",
     eyebrow: "AI • ROBOTICS • COMPUTER VISION • INTELLIGENT MANUFACTURING",
     title1: "Applied AI", title2: "Engineer",
@@ -26,11 +26,12 @@ export const text = {
     viewCertificate: "View certificate",
     projects: {
       label: "02 / PROJECTS", title: "Selected work",
-      intro: "Four connected industrial AI projects, each with code, tests, documentation and honest evaluation on GitHub.",
+      intro: "Five connected industrial AI projects, each with code, tests, documentation and honest evaluation on GitHub. Each one states clearly what has and has not been validated yet.",
       exploreAll: "EXPLORE ALL", all: "All",
       pipeline: [["Collect", "Machine data via OPC UA and MQTT into PostgreSQL"], ["Predict", "Failures before they happen, with explainable alarms"],
-                 ["Inspect", "Defects on camera images, located on a heatmap"], ["Improve", "OEE losses and a copilot for maintenance questions"]],
+                 ["Inspect", "Defects on camera images, located on a heatmap"], ["Improve", "OEE losses and a copilot for maintenance questions"], ["Integrate", "Everything in one platform, from sensor to dashboard"]],
       explore: "Explore case study", keyResult: "Key result", objective: "OBJECTIVE", built: "WHAT I BUILT", tools: "TOOLS USED", code: "View code on GitHub",
+      status: "VALIDATION STATUS", howItWorks: "HOW IT WORKS", limits: "SCOPE & LIMITS",
     },
     categories: { "Industrial AI": "Industrial AI", "Robotics": "Robotics", "Engineering": "Engineering" },
     skills: {
@@ -38,8 +39,8 @@ export const text = {
       intro: "I combine software intelligence with an engineering mindset — from data and models to robotics and production systems.",
       groups: {
         "Machine Learning & Vision": ["Python", "scikit-learn", "PyTorch", "Anomaly Detection (PatchCore)", "Explainable AI (SHAP)", "ONNX / Edge AI", "Pandas", "NumPy"],
-        "Industrial Data & IIoT": ["OPC UA", "MQTT", "Unified Namespace", "PostgreSQL", "SQL", "Grafana", "Power BI", "DAX"],
-        "Manufacturing & Industrial AI": ["OEE (ISO 22400)", "Predictive Maintenance", "Visual Quality Inspection", "MES & CMMS Data", "TPM / SMED", "Industry 4.0"],
+        "Industrial Data & IIoT": ["OPC UA", "MQTT", "Unified Namespace", "PostgreSQL / TimescaleDB", "SQL", "Grafana", "Power BI", "DAX", "Docker Compose"],
+        "Manufacturing & Industrial AI": ["OEE (ISO 22400)", "Predictive Maintenance", "Visual Quality Inspection", "RFID Lead Time", "Discrete-Event Simulation (SimPy)", "MES & CMMS Data", "TPM / SMED", "Industry 4.0"],
         "LLMs, Tools & Engineering": ["RAG", "Ollama (local LLMs)", "Streamlit", "Git", "Pytest", "Fusion 360", "MSC Adams", "PLC (Basic)", "ROS (Basic)"],
       },
     },
@@ -51,7 +52,7 @@ export const text = {
         ["Robotics & Automation", "Explored robotic systems through SCARA design, simulation and hands-on engineering work."],
         ["Applied AI", "Moved into machine learning, computer vision, NLP and generative AI."],
         ["Intelligent Manufacturing", "Focused current studies on applying AI to digital production and Industry 4.0."],
-        ["Kaizen Matrix", "Building an end-to-end industrial AI project series: data platform, predictive maintenance, visual inspection and an OEE copilot."],
+        ["Kaizen Matrix", "Building an end-to-end industrial AI project series: data platform, predictive maintenance, visual inspection, an OEE copilot and a complete production digitalization platform."],
       ],
       education: [
         ["MASTER'S", "Applied AI for Digital Production Management", "Technische Hochschule Deggendorf · Germany", "Current grade: 2.3 (German scale, 1.0 = best)"],
@@ -60,11 +61,11 @@ export const text = {
       ],
     },
     research: {
-      label: "05 / RESEARCH INTERESTS", h1: "Where I want to", h2: "go deeper.",
+      label: "06 / RESEARCH INTERESTS", h1: "Where I want to", h2: "go deeper.",
       items: ["Applied Artificial Intelligence", "Industrial AI", "Intelligent Manufacturing", "Computer Vision", "Robotics & Autonomous Systems", "Predictive Maintenance", "Generative AI", "Human-AI Collaboration", "Digital Twins"],
     },
     contact: {
-      label: "06 / CONTACT", h1: "Let's build intelligent", h2: "systems.",
+      label: "07 / CONTACT", h1: "Let's build intelligent", h2: "systems.",
       text: "Looking for a Werkstudent position, an internship, a Master's thesis or a full-time role in Industrial AI, machine learning or digital production. Available now, based in Bavaria.",
       cta: "Get in touch", role: "Applied AI Engineer", top: "Back to top ↑",
     },
@@ -72,7 +73,7 @@ export const text = {
   },
 
   de: {
-    nav: { about: "Über mich", projects: "Projekte", skills: "Kenntnisse", journey: "Werdegang", contact: "Kontakt", resume: "Lebenslauf" },
+    nav: { about: "Über mich", projects: "Projekte", skills: "Kenntnisse", journey: "Werdegang", studies: "Studium", contact: "Kontakt", resume: "Lebenslauf" },
     status: "Ab sofort verfügbar · Werkstudent, Praktikum, Masterarbeit & Festanstellung",
     eyebrow: "KI • ROBOTIK • COMPUTER VISION • INTELLIGENTE PRODUKTION",
     title1: "Applied AI", title2: "Engineer",
@@ -93,11 +94,12 @@ export const text = {
     viewCertificate: "Zertifikat ansehen",
     projects: {
       label: "02 / PROJEKTE", title: "Ausgewählte Projekte",
-      intro: "Vier zusammenhängende Industrial-AI-Projekte, jeweils mit Code, Tests, Dokumentation und ehrlicher Evaluation auf GitHub.",
+      intro: "Fünf zusammenhängende Industrial-AI-Projekte, jeweils mit Code, Tests, Dokumentation und ehrlicher Evaluation auf GitHub. Bei jedem steht klar, was bereits validiert ist und was noch nicht.",
       exploreAll: "ALLE PROJEKTE", all: "Alle",
       pipeline: [["Erfassen", "Maschinendaten über OPC UA und MQTT in PostgreSQL"], ["Vorhersagen", "Ausfälle, bevor sie passieren, mit erklärbaren Alarmen"],
-                 ["Prüfen", "Fehler auf Kamerabildern, auf einer Heatmap lokalisiert"], ["Verbessern", "OEE-Verluste und ein Copilot für Instandhaltungsfragen"]],
+                 ["Prüfen", "Fehler auf Kamerabildern, auf einer Heatmap lokalisiert"], ["Verbessern", "OEE-Verluste und ein Copilot für Instandhaltungsfragen"], ["Integrieren", "Alles in einer Plattform, vom Sensor bis zum Dashboard"]],
       explore: "Projekt ansehen", keyResult: "Ergebnis", objective: "ZIEL", built: "WAS ICH UMGESETZT HABE", tools: "WERKZEUGE", code: "Code auf GitHub ansehen",
+      status: "VALIDIERUNGSSTAND", howItWorks: "SO FUNKTIONIERT ES", limits: "UMFANG & GRENZEN",
     },
     categories: { "Industrial AI": "Industrial AI", "Robotics": "Robotik", "Engineering": "Konstruktion" },
     skills: {
@@ -105,8 +107,8 @@ export const text = {
       intro: "Ich verbinde Software-Intelligenz mit ingenieurwissenschaftlichem Denken – von Daten und Modellen bis zu Robotik und Produktionssystemen.",
       groups: {
         "Machine Learning & Vision": ["Python", "scikit-learn", "PyTorch", "Anomalieerkennung (PatchCore)", "Erklärbare KI (SHAP)", "ONNX / Edge AI", "Pandas", "NumPy"],
-        "Industrielle Daten & IIoT": ["OPC UA", "MQTT", "Unified Namespace", "PostgreSQL", "SQL", "Grafana", "Power BI", "DAX"],
-        "Produktion & Industrial AI": ["OEE (ISO 22400)", "Predictive Maintenance", "Visuelle Qualitätsprüfung", "MES- & Instandhaltungsdaten", "TPM / SMED", "Industrie 4.0"],
+        "Industrielle Daten & IIoT": ["OPC UA", "MQTT", "Unified Namespace", "PostgreSQL / TimescaleDB", "SQL", "Grafana", "Power BI", "DAX", "Docker Compose"],
+        "Produktion & Industrial AI": ["OEE (ISO 22400)", "Predictive Maintenance", "Visuelle Qualitätsprüfung", "RFID-Durchlaufzeit", "Ereignisdiskrete Simulation (SimPy)", "MES- & Instandhaltungsdaten", "TPM / SMED", "Industrie 4.0"],
         "LLMs, Tools & Konstruktion": ["RAG", "Ollama (lokale LLMs)", "Streamlit", "Git", "Pytest", "Fusion 360", "MSC Adams", "SPS (Grundlagen)", "ROS (Grundlagen)"],
       },
     },
@@ -118,7 +120,7 @@ export const text = {
         ["Robotik & Automatisierung", "Robotersysteme durch SCARA-Konstruktion, Simulation und praktische Ingenieursarbeit kennengelernt."],
         ["Angewandte KI", "Einstieg in Machine Learning, Computer Vision, NLP und generative KI."],
         ["Intelligente Produktion", "Studienschwerpunkt auf KI für die digitale Produktion und Industrie 4.0."],
-        ["Kaizen Matrix", "Aufbau einer durchgängigen Industrial-AI-Projektreihe: Datenplattform, Predictive Maintenance, visuelle Prüfung und OEE-Copilot."],
+        ["Kaizen Matrix", "Aufbau einer durchgängigen Industrial-AI-Projektreihe: Datenplattform, Predictive Maintenance, visuelle Prüfung, OEE-Copilot und eine komplette Produktions-Digitalisierungsplattform."],
       ],
       education: [
         ["MASTER", "Applied AI for Digital Production Management", "Technische Hochschule Deggendorf · Deutschland", "Aktuelle Note: 2,3 (1,0 = beste Note)"],
@@ -127,11 +129,11 @@ export const text = {
       ],
     },
     research: {
-      label: "05 / FORSCHUNGSINTERESSEN", h1: "Wo ich mich", h2: "vertiefen möchte.",
+      label: "06 / FORSCHUNGSINTERESSEN", h1: "Wo ich mich", h2: "vertiefen möchte.",
       items: ["Angewandte Künstliche Intelligenz", "Industrial AI", "Intelligente Produktion", "Computer Vision", "Robotik & autonome Systeme", "Predictive Maintenance", "Generative KI", "Mensch-KI-Zusammenarbeit", "Digitale Zwillinge"],
     },
     contact: {
-      label: "06 / KONTAKT", h1: "Lassen Sie uns intelligente", h2: "Systeme bauen.",
+      label: "07 / KONTAKT", h1: "Lassen Sie uns intelligente", h2: "Systeme bauen.",
       text: "Ich suche eine Werkstudentenstelle, ein Praktikum, eine Masterarbeit oder eine Festanstellung in Industrial AI, Machine Learning oder digitaler Produktion. Ab sofort verfügbar, wohnhaft in Bayern.",
       cta: "Kontakt aufnehmen", role: "Applied AI Engineer", top: "Nach oben ↑",
     },

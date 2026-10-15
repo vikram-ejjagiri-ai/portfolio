@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import {
   ArrowUpRight, BrainCircuit, ChevronRight, Cpu, Database,
   Download, Github, Globe, Linkedin, Mail, Menu, MoveUpRight,
-  X, Eye, Bot, Factory
+  X, Eye, Bot, Factory, GraduationCap
 } from "lucide-react";
 import { projects as projectsEn } from "./data/projects";
 import { projectsDe } from "./data/projects.de";
 import { LANGS, text } from "./i18n";
+import { evidence, curriculum } from "./data/evidence";
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
@@ -14,7 +15,7 @@ const GITHUB = "https://github.com/vikram-ejjagiri-ai";
 const LINKEDIN = "https://www.linkedin.com/in/vikramejjagiri";
 const EMAIL = "vikramejjagiri08@gmail.com";
 const B1_CERTIFICATE = "german-b1-certificate.pdf";
-const PIPELINE_IDS = ["kaizen-factory-stack", "predictive-maintenance", "visual-quality-inspection", "oee-maintenance-copilot"];
+const PIPELINE_IDS = ["kaizen-factory-stack", "predictive-maintenance", "visual-quality-inspection", "oee-maintenance-copilot", "production-digitalization-platform"];
 const STORAGE_KEY = "portfolio-lang";
 
 // Language: ?lang=de in the link wins, then the visitor's earlier choice. null = ask.
@@ -28,7 +29,9 @@ function initialLang() {
   return null;
 }
 
-const localize = (p, lang) => (lang === "de" ? { ...p, ...(projectsDe[p.id] || {}) } : p);
+const localize = (p, lang) => ({
+  ...p, ...(lang === "de" ? projectsDe[p.id] || {} : {}), ...(evidence[lang]?.[p.id] || {}),
+});
 
 function App() {
   const [lang, setLangState] = useState(initialLang);
@@ -39,6 +42,7 @@ function App() {
 
   const L = lang || "en";
   const t = text[L];
+  const C = curriculum[L];
   const projects = projectsEn.map(p => localize(p, L));
   const activeProject = projects.find(p => p.id === activeId);
   const categories = ["All", ...new Set(projects.map(p => p.category))];
@@ -67,7 +71,7 @@ function App() {
         <nav className="navbar">
           <button className="brand" onClick={() => go("home")}>VE<span>.</span></button>
           <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-            {["about", "projects", "skills", "journey", "contact"].map(x =>
+            {["about", "projects", "skills", "journey", "studies", "contact"].map(x =>
               <button key={x} onClick={() => go(x)}>{t.nav[x]}</button>
             )}
             <a className="nav-icon" href={GITHUB} target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={17}/></a>
@@ -145,7 +149,7 @@ function App() {
               })}
             </div>
             <div className="featured-grid">
-              {projects.slice(0, 4).map(p => <ProjectCard key={p.id} project={p} t={t} catLabel={catLabel} onOpen={() => setActiveId(p.id)}/>)}
+              {projects.filter(p => p.category === "Industrial AI").map(p => <ProjectCard key={p.id} project={p} t={t} catLabel={catLabel} onOpen={() => setActiveId(p.id)}/>)}
             </div>
             <div className="all-projects">
               <p className="section-label light">{t.projects.exploreAll}</p>
@@ -187,6 +191,26 @@ function App() {
               {t.journey.education.map(([kind, title, where, grade]) =>
                 <div key={kind}><span>{kind}</span><h3>{title}</h3><p>{where}</p><b>{grade}</b></div>)}
             </div>
+          </div>
+        </section>
+
+
+        <section id="studies" className="section studies-section">
+          <div className="container">
+            <p className="section-label">{C.label}</p>
+            <div className="skills-intro"><h2>{C.h1}<br/><span>{C.h2}</span></h2><p>{C.intro}</p></div>
+            <div className="studies-grid">
+              {C.groups.map(g => <div className="study-card" key={g.title}>
+                <div className="skill-icon"><GraduationCap size={22}/></div>
+                <h3>{g.title}</h3>
+                {g.modules.map(([name, topics]) => <div className="study-module" key={name}><strong>{name}</strong><span>{topics}</span></div>)}
+                {g.applied.length > 0 && <div className="study-applied"><span>{C.appliedIn}</span>
+                  {g.applied.map(id => { const pr = projects.find(x => x.id === id);
+                    return <button key={id} onClick={() => setActiveId(id)}>{pr.shortTitle} <ArrowUpRight size={12}/></button>; })}
+                </div>}
+              </div>)}
+            </div>
+            <p className="study-thesis">{C.thesis}</p>
           </div>
         </section>
 
@@ -280,9 +304,15 @@ function ProjectCard({ project, t, catLabel, onOpen }) {
       <div className="card-top"><span>{project.number}</span><span>{catLabel(project.category)}</span></div>
       <h3>{project.title}</h3><p>{project.description}</p>
       {project.result && <div className="card-result">{project.result}</div>}
+      {project.maturity && <Maturity items={project.maturity}/>}
       <div className="card-bottom"><div>{project.tools.slice(0, 3).map(x => <span key={x}>{x}</span>)}</div><span className="explore">{t.projects.explore} <ArrowUpRight size={16}/></span></div>
     </div>
   </button>;
+}
+
+function Maturity({ items, light }) {
+  return <div className={`maturity ${light ? "light" : ""}`}>{items.map(([kind, label]) =>
+    <span key={label} className={`mat mat-${kind}`}>{kind === "gap" ? "○" : kind === "ok" ? "✓" : "◆"} {label}</span>)}</div>;
 }
 
 function ProjectVisual({ project }) {
@@ -309,10 +339,14 @@ function ProjectModal({ project, t, catLabel, onClose }) {
       <h2>{project.title}</h2>
       <p className="modal-lead">{project.description}</p>
       {project.result && <div className="modal-result">{t.projects.keyResult}: {project.result}</div>}
+      {project.maturity && <><h4>{t.projects.status}</h4><Maturity items={project.maturity} light/></>}
+      {project.flow && <><h4>{t.projects.howItWorks}</h4><div className="flow">{project.flow.map((step, i) =>
+        <span key={step} className="flow-step"><b>{i + 1}</b>{step}</span>)}</div></>}
       <div className="modal-grid">
         <div><h4>{t.projects.objective}</h4><p>{project.objective}</p></div>
         {project.achievements.length > 0 && <div><h4>{t.projects.built}</h4><ul>{project.achievements.map(x => <li key={x}>{x}</li>)}</ul></div>}
       </div>
+      {project.limits && <div className="limits"><h4>{t.projects.limits}</h4><ul>{project.limits.map(x => <li key={x}>{x}</li>)}</ul></div>}
       {project.tools.length > 0 && <><h4>{t.projects.tools}</h4><div className="modal-tags">{project.tools.map(x => <span key={x}>{x}</span>)}</div></>}
       {project.github && <a className="button primary" href={project.github} target="_blank" rel="noreferrer" style={{ marginTop: "1.5rem" }}><Github size={17}/> {t.projects.code}</a>}
     </article>

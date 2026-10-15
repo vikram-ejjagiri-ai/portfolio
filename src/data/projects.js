@@ -1,7 +1,33 @@
 export const projects = [
+  {
+    id: "production-digitalization-platform",
+    number: "01",
+    title: "Production Digitalization Platform: Sensor to Dashboard",
+    shortTitle: "Digitalization Platform",
+    category: "Industrial AI",
+    tags: ["Industry 4.0", "Predictive Maintenance", "Docker"],
+    description:
+      "An end-to-end shopfloor data platform that starts with one click: live compressor data and a simulated assembly line stream over MQTT into TimescaleDB, become OEE and RFID KPIs, feed a predictive maintenance model and an AI advisor, and end up on shopfloor and management dashboards.",
+    objective:
+      "Show how a plant brings a machine online: learn what 'healthy' looks like during commissioning, then monitor live operation, link machine health to production losses and recommend actions.",
+    achievements: [
+      "Replayed the public MetroPT-3 compressor dataset over MQTT as if it came from the machine's PLC, split by time into a commissioning period (training) and live operation.",
+      "Simulated a 5-station assembly line with RFID tracking (SimPy discrete-event model), with realistic messy data: mixed time units, different station ID formats and about 15 % duplicate RFID reads.",
+      "Built an ingestion layer that validates, harmonizes and de-duplicates every message, keeps a raw audit trail and flags (not drops) implausible sensor values; raw → clean → kpi schemas in TimescaleDB.",
+      "Developed a KPI engine for OEE (A×P×Q), FPY, throughput, WIP, MTBF/MTTR and RFID lead time and flow efficiency, with documented KPI definitions.",
+      "Trained a streaming health model (Isolation Forest + SPC z-score ensemble) with alarm persistence and hysteresis, evaluated against maintenance records it never saw in training; in the end-to-end run the alarm opened about 2.5 h (dataset time) before the first reported air-leak failure.",
+      "Added an AI advisor: retrieval over an FMEA and SOP knowledge base plus a local LLM (Ollama) or the Claude API, with JSON validation and a rule-based fallback; it also writes shift summaries from the KPIs.",
+      "Delivered three Grafana dashboards as code (shopfloor, management, compressor health), SQL views with a read-only role for Power BI, and one-click start with Docker Compose; 20 unit tests."
+    ],
+    tools: ["Python", "MQTT", "TimescaleDB", "Docker", "scikit-learn", "SimPy", "Grafana", "Ollama", "Pytest"],
+    result: "Alarm about 2.5 h before the first reported air-leak failure in the end-to-end run; the whole platform starts with one click.",
+    visual: "sensor",
+    image: "projects/production-digitalization-platform.png",
+    github: "https://github.com/vikram-ejjagiri-ai/production-digitalization-platform"
+  },
     {
     id: "kaizen-factory-stack",
-    number: "01",
+    number: "02",
     title: "Kaizen Factory Stack: Industry 4.0 Data Platform",
     shortTitle: "Factory Data Platform",
     category: "Industrial AI",
@@ -26,7 +52,7 @@ export const projects = [
   },
     {
     id: "predictive-maintenance",
-    number: "02",
+    number: "03",
     title: "Predictive Maintenance: Machine Failure Prediction",
     shortTitle: "Predictive Maintenance",
     category: "Industrial AI",
@@ -51,7 +77,7 @@ export const projects = [
   },
     {
     id: "visual-quality-inspection",
-    number: "03",
+    number: "04",
     title: "AI Visual Quality Inspection",
     shortTitle: "Visual Inspection",
     category: "Industrial AI",
@@ -76,7 +102,7 @@ export const projects = [
   },
     {
     id: "oee-maintenance-copilot",
-    number: "04",
+    number: "05",
     title: "OEE Dashboard + Maintenance Copilot",
     shortTitle: "OEE + Copilot",
     category: "Industrial AI",
@@ -100,7 +126,7 @@ export const projects = [
   },
   {
     id: "scara",
-    number: "05",
+    number: "06",
     title: "Intelligent SCARA Robotic System",
     shortTitle: "SCARA Robotics",
     category: "Robotics",
@@ -120,7 +146,7 @@ export const projects = [
   },
   {
     id: "ornithopter",
-    number: "06",
+    number: "07",
     title: "Design and Analysis of Ornithopter",
     shortTitle: "Ornithopter",
     category: "Engineering",

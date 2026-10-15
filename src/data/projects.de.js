@@ -1,6 +1,24 @@
 // German texts for the projects. Keys match the project id in projects.js.
 // Anything not listed here (tools, images, links) is taken from projects.js.
 export const projectsDe = {
+  "production-digitalization-platform": {
+    title: "Produktions-Digitalisierungsplattform: vom Sensor zum Dashboard",
+    shortTitle: "Digitalisierungsplattform",
+    description:
+      "Eine durchgängige Shopfloor-Datenplattform, die mit einem Klick startet: Live-Kompressordaten und eine simulierte Montagelinie senden über MQTT in TimescaleDB, werden zu OEE- und RFID-Kennzahlen, speisen ein Predictive-Maintenance-Modell und einen KI-Berater und landen in Dashboards für Shopfloor und Management.",
+    objective:
+      "Zeigen, wie ein Werk eine Maschine in Betrieb nimmt: in der Inbetriebnahme lernen, wie „gesund“ aussieht, dann den Live-Betrieb überwachen, Maschinenzustand mit Produktionsverlusten verknüpfen und Maßnahmen empfehlen.",
+    achievements: [
+      "Den öffentlichen MetroPT-3-Kompressordatensatz über MQTT abgespielt, als käme er von der SPS der Maschine; zeitlich aufgeteilt in Inbetriebnahme (Training) und Live-Betrieb.",
+      "Eine Montagelinie mit 5 Stationen und RFID-Tracking simuliert (ereignisdiskretes Modell mit SimPy), mit realistisch unsauberen Daten: gemischte Zeiteinheiten, verschiedene Stations-IDs und ca. 15 % doppelte RFID-Lesungen.",
+      "Eine Ingestion-Schicht entwickelt, die jede Nachricht prüft, harmonisiert und dedupliziert, einen Rohdaten-Audit-Trail behält und unplausible Sensorwerte markiert statt verwirft; Schemas raw → clean → kpi in TimescaleDB.",
+      "Eine KPI-Engine für OEE (A×P×Q), FPY, Durchsatz, WIP, MTBF/MTTR sowie RFID-Durchlaufzeit und Flussgrad entwickelt, mit dokumentierten Kennzahldefinitionen.",
+      "Ein Streaming-Zustandsmodell (Isolation Forest + SPC-z-Score-Ensemble) mit Alarm-Persistenz und Hysterese trainiert und gegen Instandhaltungsmeldungen bewertet, die es im Training nie gesehen hat; im End-to-End-Lauf öffnete der Alarm ca. 2,5 h (Datensatzzeit) vor dem ersten gemeldeten Luftleck-Ausfall.",
+      "Einen KI-Berater ergänzt: Suche in einer FMEA- und SOP-Wissensbasis plus lokales LLM (Ollama) oder Claude API, mit JSON-Validierung und regelbasiertem Fallback; er schreibt auch Schichtzusammenfassungen aus den Kennzahlen.",
+      "Drei Grafana-Dashboards als Code (Shopfloor, Management, Kompressorzustand), SQL-Views mit Lese-Rolle für Power BI und Ein-Klick-Start mit Docker Compose; 20 Unit-Tests.",
+    ],
+    result: "Alarm ca. 2,5 h vor dem ersten gemeldeten Luftleck-Ausfall im End-to-End-Lauf; die ganze Plattform startet mit einem Klick.",
+  },
   "kaizen-factory-stack": {
     title: "Kaizen Factory Stack: Industrie-4.0-Datenplattform",
     description:
