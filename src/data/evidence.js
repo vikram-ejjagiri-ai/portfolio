@@ -13,6 +13,15 @@ export const evidence = {
         "Planned time assumes 24/7 operation (no shift calendar), and stop reasons are not confirmed by operators.",
       ],
     },
+    "kaizen-assist": {
+      maturity: [["data", "Synthetic documents + test database (two knowledge packs)"], ["ok", "64 + 16 evaluation questions · 25 unit tests"], ["gap", "Not yet used with real company documents; Databricks part not executed"]],
+      flow: ["Markdown + PDF documents", "Section chunks + injection screening", "Hybrid search (BM25 + embeddings, RRF)", "Router: docs / data / compare / safety", "Guarded Text-to-SQL (DuckDB)", "Local LLM or extractive answer", "Checks: citations, numbers, injection"],
+      limits: [
+        "All documents and data are synthetic, and the corpora are small.",
+        "The 64 e-drive questions were written during development; the lean pack (75 %) is the fairer score.",
+        "Published numbers are for the deterministic mode without an LLM; the Databricks mapping is a design sketch.",
+      ],
+    },
     "kaizen-factory-stack": {
       maturity: [["data", "Prototype · simulated bottling line"], ["ok", "Runs locally end to end"], ["gap", "Not yet tested on a real PLC"]],
       flow: ["OPC UA simulator (3 machines, 7 sensors)", "OPC UA → MQTT bridge", "Mosquitto broker", "Ingest service", "PostgreSQL", "Grafana dashboard"],
@@ -57,6 +66,15 @@ export const evidence = {
         "Die Kompressordaten sind echt, die Montagelinie, die RFID-Lesungen und die Wissensbasis sind simuliert.",
         "Der Datensatz enthält nur vier gemeldete Ausfälle; die Erkennungsergebnisse beruhen also auf sehr wenigen Ereignissen.",
         "Die geplante Zeit geht von 24/7-Betrieb aus (kein Schichtkalender), und Stillstandsgründe werden nicht von Bedienern bestätigt.",
+      ],
+    },
+    "kaizen-assist": {
+      maturity: [["data", "Synthetische Dokumente + Prüfdatenbank (zwei Wissenspakete)"], ["ok", "64 + 16 Evaluationsfragen · 25 Unit-Tests"], ["gap", "Noch nicht mit echten Firmendokumenten genutzt; Databricks-Teil nicht ausgeführt"]],
+      flow: ["Markdown- + PDF-Dokumente", "Abschnitte + Injection-Prüfung", "Hybride Suche (BM25 + Embeddings, RRF)", "Router: Dokumente / Daten / Vergleich / Sicherheit", "Abgesichertes Text-to-SQL (DuckDB)", "Lokales LLM oder extraktive Antwort", "Prüfung: Quellen, Zahlen, Injection"],
+      limits: [
+        "Alle Dokumente und Daten sind synthetisch, die Datenmengen sind klein.",
+        "Die 64 E-Antriebs-Fragen entstanden während der Entwicklung; das Lean-Paket (75 %) ist der fairere Wert.",
+        "Die Zahlen gelten für den deterministischen Modus ohne LLM; das Databricks-Konzept ist ein Entwurf.",
       ],
     },
     "kaizen-factory-stack": {

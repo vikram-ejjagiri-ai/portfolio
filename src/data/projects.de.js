@@ -19,6 +19,22 @@ export const projectsDe = {
     ],
     result: "Alarm ca. 2,5 h vor dem ersten gemeldeten Luftleck-Ausfall im End-to-End-Lauf; die ganze Plattform startet mit einem Klick.",
   },
+  "kaizen-assist": {
+    title: "Kaizen Assist: GenAI-Wissensassistent für das Engineering",
+    description:
+      "Ein KI-Assistent für Engineering- und Produktionsteams, der nur aus Quellen antwortet: Spezifikationen, Prüfanweisungen und Prüfberichte (Markdown und PDF) sowie eine Prüfdatenbank. Jede Antwort nennt ihre Quellen, berücksichtigt die gültige Dokumentversion und wird automatisch geprüft.",
+    objective:
+      "Die Suchzeit nach dem gültigen Grenzwert, Verfahren oder Prüfergebnis verkürzen, ohne die Risiken eines einfachen Chatbots: erfundene Zahlen, veraltete Dokumentversionen und versteckte Anweisungen in Dateien.",
+    achievements: [
+      "Hybride Suche (BM25 + Ollama-Embeddings, Reciprocal Rank Fusion) über Abschnitte von Markdown- und PDF-Dokumenten gebaut, mit Versionslogik: ersetzte Versionen werden nur bei Fragen zur Historie verwendet.",
+      "Abgesichertes Text-to-SQL auf DuckDB entwickelt: semantische Schicht mit Tabellenbeschreibungen, Kennzahlen und geprüften Beispielabfragen, LLM-Pfad mit einem Reparaturversuch und regelbasiertem Fallback, sqlglot-Guard (nur ein SELECT, Tabellen-Allowlist, keine Dateifunktionen, Zeilenlimit) und schreibgeschützte Datenbank.",
+      "Ein Vergleichswerkzeug ergänzt, das den freigegebenen Grenzwert aus der Spezifikation mit Messwerten aus der Datenbank verbindet, z. B. 3 von 22 Thermikläufen über dem verschärften Grenzwert von 170 °C, die gegen die alte Version bestanden hatten.",
+      "Guardrails eingebaut: Prompt-Injection-Prüfung beim Einlesen (getestet mit einer versteckten Anweisung in einer Lieferantennotiz), Ablehnung von Sicherheitsumgehungen mit Zitat der Sicherheitsanweisung, „nicht gefunden“ bei fachfremden Fragen sowie Prüfung von Quellenangaben und Zahlen.",
+      "Die Engine über Wissenspakete domänenneutral gemacht: ein Paket zur E-Antriebs-Validierung (Dokumente + Prüfdatenbank mit 10 Tabellen) und ein reines Dokumentenpaket für Lean Shopfloor (SMED, 5S, TPM, OEE, A3).",
+      "Ein Evaluations-Framework aufgebaut (Routing, Hit@k, Antwortfakten, SQL-Ausführungsgenauigkeit, nicht gefunden, Sicherheit, Injection): 96,9 % auf dem Entwicklungsset mit 64 Fragen und 75 % auf dem Lean-Paket ohne Anpassung; 25 Unit-Tests, Streamlit-App und ein Databricks-Konzept (Vector Search, Genie, Agent Evaluation) als Entwurf.",
+    ],
+    result: "96,9 % End-to-End auf dem Entwicklungsset, 100 % SQL-Ausführungsgenauigkeit; 75 % auf einer zweiten Domäne ohne Anpassung.",
+  },
   "kaizen-factory-stack": {
     title: "Kaizen Factory Stack: Industrie-4.0-Datenplattform",
     description:

@@ -25,9 +25,34 @@ export const projects = [
     image: "projects/production-digitalization-platform.png",
     github: "https://github.com/vikram-ejjagiri-ai/production-digitalization-platform"
   },
+  {
+    id: "kaizen-assist",
+    number: "02",
+    title: "Kaizen Assist: GenAI Knowledge Assistant for Engineering",
+    shortTitle: "Kaizen Assist",
+    category: "Industrial AI",
+    tags: ["RAG", "Text-to-SQL", "LLM Evaluation"],
+    description:
+      "A grounded AI assistant for engineering and production teams: it answers questions from specifications, procedures and test reports (Markdown and PDF) and from a test database, cites every source, knows which document version is valid and checks its own answers.",
+    objective:
+      "Cut the time engineers spend searching for the valid limit, procedure or test result, without the risks of a plain chatbot: invented numbers, outdated document versions and instructions hidden in files.",
+    achievements: [
+      "Built hybrid retrieval (BM25 + Ollama embeddings, Reciprocal Rank Fusion) over section-level chunks of Markdown and PDF documents, with version awareness: superseded versions are hidden unless the question asks for history.",
+      "Developed guarded Text-to-SQL on DuckDB: a semantic layer with table descriptions, measures and verified example queries; an LLM path with one repair attempt and a rule-based fallback; a sqlglot guard (single SELECT, table allow-list, no file functions, row limit) and a read-only database.",
+      "Added a compare tool that combines the released limit from a specification with measured values from the database, e.g. finding 3 of 22 thermal runs above a tightened 170 °C limit that had passed against the old version.",
+      "Added guardrails: prompt-injection screening at ingestion (tested with a planted instruction in a supplier note), safety refusals that quote the safety instruction, 'not found' for out-of-scope questions, and post-checks for citations and grounded numbers.",
+      "Made the engine domain-neutral with knowledge packs: an e-drive validation pack (documents + 10-table test database) and a documents-only lean shop-floor pack (SMED, 5S, TPM, OEE, A3).",
+      "Built an evaluation harness (routing, Hit@k, answer facts, SQL execution accuracy, not-found, safety, injection): 96.9 % on the 64-question development set and 75 % on the lean pack, evaluated without tuning; 25 unit tests, Streamlit app and a Databricks mapping (Vector Search, Genie, Agent Evaluation) as a design sketch."
+    ],
+    tools: ["Python", "RAG", "Ollama", "DuckDB", "sqlglot", "pypdf", "Streamlit", "Pytest"],
+    result: "96.9 % end-to-end on the development set, 100 % SQL execution accuracy; 75 % on a second domain without tuning.",
+    visual: "sensor",
+    image: "projects/kaizen-assist.png",
+    github: "https://github.com/vikram-ejjagiri-ai/kaizen-assist"
+  },
     {
     id: "kaizen-factory-stack",
-    number: "02",
+    number: "03",
     title: "Kaizen Factory Stack: Industry 4.0 Data Platform",
     shortTitle: "Factory Data Platform",
     category: "Industrial AI",
@@ -52,7 +77,7 @@ export const projects = [
   },
     {
     id: "predictive-maintenance",
-    number: "03",
+    number: "04",
     title: "Predictive Maintenance: Machine Failure Prediction",
     shortTitle: "Predictive Maintenance",
     category: "Industrial AI",
@@ -77,7 +102,7 @@ export const projects = [
   },
     {
     id: "visual-quality-inspection",
-    number: "04",
+    number: "05",
     title: "AI Visual Quality Inspection",
     shortTitle: "Visual Inspection",
     category: "Industrial AI",
@@ -102,7 +127,7 @@ export const projects = [
   },
     {
     id: "oee-maintenance-copilot",
-    number: "05",
+    number: "06",
     title: "OEE Dashboard + Maintenance Copilot",
     shortTitle: "OEE + Copilot",
     category: "Industrial AI",
@@ -126,7 +151,7 @@ export const projects = [
   },
   {
     id: "scara",
-    number: "06",
+    number: "07",
     title: "Intelligent SCARA Robotic System",
     shortTitle: "SCARA Robotics",
     category: "Robotics",
@@ -146,7 +171,7 @@ export const projects = [
   },
   {
     id: "ornithopter",
-    number: "07",
+    number: "08",
     title: "Design and Analysis of Ornithopter",
     shortTitle: "Ornithopter",
     category: "Engineering",

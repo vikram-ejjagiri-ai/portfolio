@@ -26,7 +26,7 @@ export const text = {
     viewCertificate: "View certificate",
     projects: {
       label: "02 / PROJECTS", title: "Selected work",
-      intro: "Five connected industrial AI projects, each with code, tests, documentation and honest evaluation on GitHub. Each one states clearly what has and has not been validated yet.",
+      intro: "Six industrial AI projects, each with code, tests, documentation and honest evaluation on GitHub. Five form a connected pipeline from sensor to dashboard; Kaizen Assist answers engineering questions from documents and data. Each one states clearly what has and has not been validated yet.",
       exploreAll: "EXPLORE ALL", all: "All",
       pipeline: [["Collect", "Machine data via OPC UA and MQTT into PostgreSQL"], ["Predict", "Failures before they happen, with explainable alarms"],
                  ["Inspect", "Defects on camera images, located on a heatmap"], ["Improve", "OEE losses and a copilot for maintenance questions"], ["Integrate", "Everything in one platform, from sensor to dashboard"]],
@@ -41,7 +41,7 @@ export const text = {
         "Machine Learning & Vision": ["Python", "scikit-learn", "PyTorch", "Anomaly Detection (PatchCore)", "Explainable AI (SHAP)", "ONNX / Edge AI", "Pandas", "NumPy"],
         "Industrial Data & IIoT": ["OPC UA", "MQTT", "Unified Namespace", "PostgreSQL / TimescaleDB", "SQL", "Grafana", "Power BI", "DAX", "Docker Compose"],
         "Manufacturing & Industrial AI": ["OEE (ISO 22400)", "Predictive Maintenance", "Visual Quality Inspection", "RFID Lead Time", "Discrete-Event Simulation (SimPy)", "MES & CMMS Data", "TPM / SMED", "Industry 4.0"],
-        "LLMs, Tools & Engineering": ["RAG", "Ollama (local LLMs)", "Streamlit", "Git", "Pytest", "Fusion 360", "MSC Adams", "PLC (Basic)", "ROS (Basic)"],
+        "LLMs, Tools & Engineering": ["RAG", "Text-to-SQL", "LLM evaluation", "Ollama (local LLMs)", "Streamlit", "Git", "Pytest", "Fusion 360", "MSC Adams", "PLC (Basic)", "ROS (Basic)"],
       },
     },
     journey: {
@@ -94,7 +94,7 @@ export const text = {
     viewCertificate: "Zertifikat ansehen",
     projects: {
       label: "02 / PROJEKTE", title: "Ausgewählte Projekte",
-      intro: "Fünf zusammenhängende Industrial-AI-Projekte, jeweils mit Code, Tests, Dokumentation und ehrlicher Evaluation auf GitHub. Bei jedem steht klar, was bereits validiert ist und was noch nicht.",
+      intro: "Sechs Industrial-AI-Projekte, jeweils mit Code, Tests, Dokumentation und ehrlicher Evaluation auf GitHub. Fünf bilden eine zusammenhängende Pipeline vom Sensor bis zum Dashboard; Kaizen Assist beantwortet Engineering-Fragen aus Dokumenten und Daten. Bei jedem steht klar, was bereits validiert ist und was noch nicht.",
       exploreAll: "ALLE PROJEKTE", all: "Alle",
       pipeline: [["Erfassen", "Maschinendaten über OPC UA und MQTT in PostgreSQL"], ["Vorhersagen", "Ausfälle, bevor sie passieren, mit erklärbaren Alarmen"],
                  ["Prüfen", "Fehler auf Kamerabildern, auf einer Heatmap lokalisiert"], ["Verbessern", "OEE-Verluste und ein Copilot für Instandhaltungsfragen"], ["Integrieren", "Alles in einer Plattform, vom Sensor bis zum Dashboard"]],
@@ -109,7 +109,7 @@ export const text = {
         "Machine Learning & Vision": ["Python", "scikit-learn", "PyTorch", "Anomalieerkennung (PatchCore)", "Erklärbare KI (SHAP)", "ONNX / Edge AI", "Pandas", "NumPy"],
         "Industrielle Daten & IIoT": ["OPC UA", "MQTT", "Unified Namespace", "PostgreSQL / TimescaleDB", "SQL", "Grafana", "Power BI", "DAX", "Docker Compose"],
         "Produktion & Industrial AI": ["OEE (ISO 22400)", "Predictive Maintenance", "Visuelle Qualitätsprüfung", "RFID-Durchlaufzeit", "Ereignisdiskrete Simulation (SimPy)", "MES- & Instandhaltungsdaten", "TPM / SMED", "Industrie 4.0"],
-        "LLMs, Tools & Konstruktion": ["RAG", "Ollama (lokale LLMs)", "Streamlit", "Git", "Pytest", "Fusion 360", "MSC Adams", "SPS (Grundlagen)", "ROS (Grundlagen)"],
+        "LLMs, Tools & Konstruktion": ["RAG", "Text-to-SQL", "LLM-Evaluation", "Ollama (lokale LLMs)", "Streamlit", "Git", "Pytest", "Fusion 360", "MSC Adams", "SPS (Grundlagen)", "ROS (Grundlagen)"],
       },
     },
     journey: {
