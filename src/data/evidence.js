@@ -22,6 +22,15 @@ export const evidence = {
         "Published numbers are for the deterministic mode without an LLM; the Databricks mapping is a design sketch.",
       ],
     },
+    "knowflow-ai": {
+      maturity: [["data", "Fictional demo files + own test uploads"], ["ok", "42 automated tests · browser end-to-end test"], ["gap", "Not yet used by real users or with large document collections"]],
+      flow: ["Upload (PDF, scan, DOCX, PPTX, XLSX, CSV, image)", "Extraction + OCR + type detection", "Private workspace per user", "Router: answer / explain / data / edit", "BM25 search with citations or pandas query", "LLM (Groq, Gemini, Claude, Ollama) or rules", "Preview → confirm → verify → undo"],
+      limits: [
+        "Search is keyword-based (BM25 plus LLM keywords); embeddings would find more meaning-based matches.",
+        "General-knowledge answers are labelled but not checked against sources; only cited facts and numbers are verified.",
+        "Runs locally with SQLite and a data folder; no team sharing, no password reset by email, and OCR can misread low-quality photos.",
+      ],
+    },
     "kaizen-factory-stack": {
       maturity: [["data", "Prototype · simulated bottling line"], ["ok", "Runs locally end to end"], ["gap", "Not yet tested on a real PLC"]],
       flow: ["OPC UA simulator (3 machines, 7 sensors)", "OPC UA → MQTT bridge", "Mosquitto broker", "Ingest service", "PostgreSQL", "Grafana dashboard"],
@@ -75,6 +84,15 @@ export const evidence = {
         "Alle Dokumente und Daten sind synthetisch, die Datenmengen sind klein.",
         "Die 64 E-Antriebs-Fragen entstanden während der Entwicklung; das Lean-Paket (75 %) ist der fairere Wert.",
         "Die Zahlen gelten für den deterministischen Modus ohne LLM; das Databricks-Konzept ist ein Entwurf.",
+      ],
+    },
+    "knowflow-ai": {
+      maturity: [["data", "Fiktive Demodateien + eigene Test-Uploads"], ["ok", "42 automatische Tests · Browser-End-to-End-Test"], ["gap", "Noch nicht mit echten Nutzern oder großen Dokumentmengen eingesetzt"]],
+      flow: ["Upload (PDF, Scan, DOCX, PPTX, XLSX, CSV, Bild)", "Extraktion + OCR + Typerkennung", "Privater Arbeitsbereich pro Nutzer", "Router: Antwort / Erklärung / Daten / Änderung", "BM25-Suche mit Quellen oder pandas-Abfrage", "LLM (Groq, Gemini, Claude, Ollama) oder Regeln", "Vorschau → Bestätigung → Prüfung → Rückgängig"],
+      limits: [
+        "Die Suche ist schlüsselwortbasiert (BM25 plus LLM-Suchbegriffe); Embeddings würden mehr bedeutungsähnliche Treffer finden.",
+        "Antworten aus Allgemeinwissen sind gekennzeichnet, aber nicht gegen Quellen geprüft; nur zitierte Fakten und Zahlen werden überprüft.",
+        "Läuft lokal mit SQLite und einem Datenordner; kein Teilen im Team, kein Passwort-Reset per E-Mail, und OCR kann schlechte Fotos falsch lesen.",
       ],
     },
     "kaizen-factory-stack": {

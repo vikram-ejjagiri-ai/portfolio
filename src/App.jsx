@@ -149,7 +149,7 @@ function App() {
               })}
             </div>
             <div className="featured-grid">
-              {projects.filter(p => p.category === "Industrial AI").map(p => <ProjectCard key={p.id} project={p} t={t} catLabel={catLabel} onOpen={() => setActiveId(p.id)}/>)}
+              {projects.filter(p => p.category === "Industrial AI" || p.category === "Generative AI").map(p => <ProjectCard key={p.id} project={p} t={t} catLabel={catLabel} onOpen={() => setActiveId(p.id)}/>)}
             </div>
             <div className="all-projects">
               <p className="section-label light">{t.projects.exploreAll}</p>

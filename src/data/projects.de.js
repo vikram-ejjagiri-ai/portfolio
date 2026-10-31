@@ -35,6 +35,23 @@ export const projectsDe = {
     ],
     result: "96,9 % End-to-End auf dem Entwicklungsset, 100 % SQL-Ausführungsgenauigkeit; 75 % auf einer zweiten Domäne ohne Anpassung.",
   },
+  "knowflow-ai": {
+    title: "KnowFlow AI: Persönlicher KI-Assistent für Dokumente und Tabellen",
+    description:
+      "Ein Full-Stack-KI-Arbeitsbereich: PDFs, Scans, Word-, PowerPoint- und Excel-Dateien in Ordner hochladen und dann wie mit ChatGPT mit ihnen chatten. Antworten nennen die genaue Seite oder Zelle, Tabellenfragen werden zu Tabellen und Diagrammen, und der Assistent kann eine Tabelle ändern, aber erst nachdem man die genaue Änderung bestätigt hat.",
+    objective:
+      "Den Komfort eines allgemeinen KI-Chatbots mit dem verbinden, was man für eigene Dateien braucht: überprüfbare Antworten, Analysen, die berechnet statt geraten sind, Änderungen nie ohne Bestätigung und Daten, die für jeden Nutzer privat bleiben.",
+    achievements: [
+      "Ein FastAPI-Backend und ein Next.js-, React- und TypeScript-Frontend gebaut: Ordner, Drag-and-Drop-Upload mit Fortschritt, Tags, Versionshistorie mit Wiederherstellung, Dokumentvorschau mit Sprung zur Quelle, Tabellenanalyse, Berichte und ein Aktivitätsprotokoll.",
+      "Dokumentverständnis für PDF (pro Seite und Tabellen), gescannte PDFs und Bilder (Offline-OCR), DOCX, PPTX (Folien und Notizen), XLSX und CSV entwickelt, mit Erkennung von Kopfzeilen und Spaltentypen auch in unsauberen Tabellen.",
+      "Einen Chat-Router umgesetzt: belegte Antworten mit [S1]-Quellen über BM25-Suche, Dokumenterklärungen, Folgefragen mit Gesprächskontext und klar gekennzeichnete Antworten aus Allgemeinwissen, wenn die Dateien eine Frage nicht abdecken.",
+      "Tabellenfragen in eine validierte JSON-Abfrage übersetzt, die pandas ausführt (das Sprachmodell führt nie Code aus), mit Diagrammempfehlung und einem Satz, der genau erklärt, was berechnet wurde.",
+      "Sichere KI-Änderungen entworfen: Zeile finden, bei Mehrdeutigkeit nachfragen, Wert prüfen, Vorschau alt → neu, erst nach Bestätigung schreiben, prüfen, ob sich die Zelle inzwischen geändert hat, verifizieren, protokollieren und rückgängig machen; Originale werden nie verändert.",
+      "Konten und private Arbeitsbereiche ergänzt (gesalzene PBKDF2-Passwörter, HttpOnly-Session-Cookies, Besitzerprüfung bei jeder Anfrage), Chat über mehrere ausgewählte Dateien, Gesprächsverlauf, PDF-Export von Antworten, ZIP-Export und Löschen aller Daten.",
+      "Groq, Gemini, Claude, OpenAI oder ein lokales Ollama-Modell mit automatischem Fallback angebunden, dazu ein Regelmodus ganz ohne KI; 42 automatische Tests (inklusive Trennung zweier Nutzer) und ein Playwright-Browsertest.",
+    ],
+    result: "42 automatische Tests, darunter ein zweiter Nutzer, der die Dateien des ersten weder sehen noch abfragen oder ändern kann; Tabellenänderungen nur nach ausdrücklicher Bestätigung, mit Rückgängig.",
+  },
   "kaizen-factory-stack": {
     title: "Kaizen Factory Stack: Industrie-4.0-Datenplattform",
     description:

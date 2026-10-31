@@ -50,9 +50,35 @@ export const projects = [
     image: "projects/kaizen-assist.png",
     github: "https://github.com/vikram-ejjagiri-ai/kaizen-assist"
   },
+  {
+    id: "knowflow-ai",
+    number: "03",
+    title: "KnowFlow AI: Personal AI Assistant for Documents and Spreadsheets",
+    shortTitle: "KnowFlow AI",
+    category: "Generative AI",
+    tags: ["RAG", "Full-Stack", "Safe AI Actions"],
+    description:
+      "A full-stack AI workspace: upload PDFs, scans, Word, PowerPoint and Excel files into folders, then chat with them like with ChatGPT. Answers cite the exact page or cell, spreadsheet questions become tables and charts, and the assistant can edit a spreadsheet, but only after you confirm the exact change.",
+    objective:
+      "Combine the convenience of a general AI chatbot with what people need for their own files: answers they can verify, analysis that is calculated rather than guessed, changes that never happen without confirmation, and data that stays private to each user.",
+    achievements: [
+      "Built a FastAPI backend and a Next.js + React + TypeScript frontend: folders, drag-and-drop upload with progress, tags, version history with restore, document preview with jump-to-citation, workbook analysis, reports and an activity log.",
+      "Developed document understanding for PDF (per page and tables), scanned PDFs and images (offline OCR), DOCX, PPTX (slides and speaker notes), XLSX and CSV, with header and column-type detection for messy spreadsheets.",
+      "Implemented a chat router: grounded answers with [S1] citations over BM25 search, document explanations, follow-ups that reuse the conversation, and general-knowledge answers that are clearly labelled when the files do not cover a question.",
+      "Turned spreadsheet questions into a validated JSON query that pandas executes (the language model never runs code), with a chart recommendation and a sentence explaining exactly what was calculated.",
+      "Designed safe AI edits: locate the row, ask on ambiguity, validate the value, preview old → new, apply only after Confirm, check that the cell has not changed meanwhile, verify, log and undo; originals are never modified.",
+      "Added accounts and private workspaces (salted PBKDF2 passwords, HttpOnly session cookies, owner check on every request), multi-file chat scope, conversation history, PDF export of answers, ZIP export and delete-all data controls.",
+      "Connected Groq, Gemini, Claude, OpenAI or a local Ollama model with automatic fallback, plus a rules mode without any AI; 42 automated tests (including two-user isolation) and a Playwright browser test."
+    ],
+    tools: ["Python", "FastAPI", "Next.js", "TypeScript", "RAG", "pandas", "OCR", "SQLite", "Pytest", "Playwright"],
+    result: "42 automated tests, including a second user who cannot see, chat about or edit the first user's files; spreadsheet edits only after explicit confirmation, with undo.",
+    visual: "sensor",
+    image: "projects/knowflow-ai.png",
+    github: "https://github.com/vikram-ejjagiri-ai/personal-ai-assistant"
+  },
     {
     id: "kaizen-factory-stack",
-    number: "03",
+    number: "04",
     title: "Kaizen Factory Stack: Industry 4.0 Data Platform",
     shortTitle: "Factory Data Platform",
     category: "Industrial AI",
@@ -77,7 +103,7 @@ export const projects = [
   },
     {
     id: "predictive-maintenance",
-    number: "04",
+    number: "05",
     title: "Predictive Maintenance: Machine Failure Prediction",
     shortTitle: "Predictive Maintenance",
     category: "Industrial AI",
@@ -102,7 +128,7 @@ export const projects = [
   },
     {
     id: "visual-quality-inspection",
-    number: "05",
+    number: "06",
     title: "AI Visual Quality Inspection",
     shortTitle: "Visual Inspection",
     category: "Industrial AI",
@@ -127,7 +153,7 @@ export const projects = [
   },
     {
     id: "oee-maintenance-copilot",
-    number: "06",
+    number: "07",
     title: "OEE Dashboard + Maintenance Copilot",
     shortTitle: "OEE + Copilot",
     category: "Industrial AI",
@@ -151,7 +177,7 @@ export const projects = [
   },
   {
     id: "scara",
-    number: "07",
+    number: "08",
     title: "Intelligent SCARA Robotic System",
     shortTitle: "SCARA Robotics",
     category: "Robotics",
@@ -171,7 +197,7 @@ export const projects = [
   },
   {
     id: "ornithopter",
-    number: "08",
+    number: "09",
     title: "Design and Analysis of Ornithopter",
     shortTitle: "Ornithopter",
     category: "Engineering",
