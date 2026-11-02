@@ -31,6 +31,15 @@ export const evidence = {
         "Runs locally with SQLite and a data folder; no team sharing, no password reset by email, and OCR can misread low-quality photos.",
       ],
     },
+    "kaizen-optimize": {
+      maturity: [["data", "Four real public datasets (lathe tests, benchmark, truck fleet, spare-part sales)"], ["ok", "Benchmark match · hold-out tests · 18 unit tests"], ["gap", "Costs assumed; not yet run on one plant's own data"]],
+      flow: ["Real data (Excel / CSV)", "Cleaning + censoring + time split", "Calibrated models (roughness, Taylor, Weibull, demand)", "Cost of every decision", "Optimizers vs today's methods", "Safety + hold-out checks", "results.json → dashboard + AI advisor"],
+      limits: [
+        "The four datasets come from different sources; the links between the stages show how decisions interact, they are not measurements from one plant.",
+        "Costs (machine rate, inserts, repairs, part values) are assumptions; the cutting model interpolates a 2-level experiment.",
+        "The scheduling instances are research benchmarks, and maintenance time is in the dataset's anonymised units.",
+      ],
+    },
     "kaizen-factory-stack": {
       maturity: [["data", "Prototype · simulated bottling line"], ["ok", "Runs locally end to end"], ["gap", "Not yet tested on a real PLC"]],
       flow: ["OPC UA simulator (3 machines, 7 sensors)", "OPC UA → MQTT bridge", "Mosquitto broker", "Ingest service", "PostgreSQL", "Grafana dashboard"],
@@ -93,6 +102,15 @@ export const evidence = {
         "Die Suche ist schlüsselwortbasiert (BM25 plus LLM-Suchbegriffe); Embeddings würden mehr bedeutungsähnliche Treffer finden.",
         "Antworten aus Allgemeinwissen sind gekennzeichnet, aber nicht gegen Quellen geprüft; nur zitierte Fakten und Zahlen werden überprüft.",
         "Läuft lokal mit SQLite und einem Datenordner; kein Teilen im Team, kein Passwort-Reset per E-Mail, und OCR kann schlechte Fotos falsch lesen.",
+      ],
+    },
+    "kaizen-optimize": {
+      maturity: [["data", "Vier echte öffentliche Datensätze (Drehversuche, Benchmark, Lkw-Flotte, Ersatzteilverkäufe)"], ["ok", "Benchmark-Abgleich · Hold-out-Tests · 18 Unit-Tests"], ["gap", "Kosten angenommen; noch nicht mit Daten eines Werks gelaufen"]],
+      flow: ["Echte Daten (Excel / CSV)", "Bereinigung + Zensierung + zeitliche Aufteilung", "Kalibrierte Modelle (Rauheit, Taylor, Weibull, Nachfrage)", "Kosten jeder Entscheidung", "Optimierer vs. heutige Methoden", "Sicherheits- + Hold-out-Prüfung", "results.json → Dashboard + KI-Berater"],
+      limits: [
+        "Die vier Datensätze stammen aus verschiedenen Quellen; die Verbindungen zwischen den Stufen zeigen das Zusammenspiel, sie sind keine Messungen aus einem Werk.",
+        "Kosten (Maschinenstundensatz, Wendeplatten, Reparaturen, Teilewerte) sind Annahmen; das Schnittmodell interpoliert einen 2-Stufen-Versuch.",
+        "Die Planungsinstanzen sind Forschungs-Benchmarks, und die Instandhaltungszeit liegt in anonymisierten Einheiten des Datensatzes vor.",
       ],
     },
     "kaizen-factory-stack": {

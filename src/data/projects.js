@@ -76,9 +76,34 @@ export const projects = [
     image: "projects/knowflow-ai.png",
     github: "https://github.com/vikram-ejjagiri-ai/personal-ai-assistant"
   },
+  {
+    id: "kaizen-optimize",
+    number: "04",
+    title: "Kaizen Optimize: Production Optimization on Real Data",
+    shortTitle: "Kaizen Optimize",
+    category: "Industrial AI",
+    tags: ["Bayesian Optimization", "Scheduling", "Reliability"],
+    description:
+      "Four decisions a machining plant makes every week, each optimized on a real public dataset: cutting data from C45 lathe experiments, job sequencing on a published scheduling benchmark, component replacement from 23,550 SCANIA trucks, and spare-part stock from 51 months of real sales. Every optimizer is compared with the method engineers use today.",
+    objective:
+      "Go beyond prediction to the decision itself: which settings to run, which job next on which machine, when to replace a wearing part and how much to stock, with the decisions feeding each other as in a real plant.",
+    achievements: [
+      "Calibrated a roughness model (R² 0.95) and a Taylor tool-life model (T = 565 · vc^-0.32) on real C45 turning experiments, and used the measured scatter (±12 %) as the noise of every simulated trial cut.",
+      "Compared Bayesian optimization (Gaussian process, constrained expected improvement) with DOE + response surface and random search on 20 trial cuts: Bayesian optimization was 4–11 % from the optimum (median), with a worst case of 8–20 % against up to 75 % for DOE; recommended settings cut machining cost by 40 %.",
+      "Built a scheduler for unrelated machines with sequence-dependent setups: an iterated greedy local search reached 2.6 % mean gap to the best-known solutions of a published benchmark, ahead of the published CP Optimizer, MILP, simulated annealing and LLM schedules; CP-SAT reproduced the published optimum on 9 of 9 small instances.",
+      "Fitted a censored Weibull model to 23,550 trucks (90 % still running): wear-out shape β 2.41, best replacement age 425 with a bootstrap confidence interval, checked with Kaplan-Meier on hold-out trucks; 24 % lower cost than running to failure.",
+      "Optimized (s, Q) reorder policies for 321 spare parts by simulation and tested them on 12 unseen months: the textbook formula cost 39 % more because demand fell over the life cycle, so planning with recent demand mattered more than the method.",
+      "Connected the stages (faster cutting → shorter schedule, due components → maintenance windows, tool use → spare parts), with a Streamlit dashboard, an LLM advisor whose numbers are checked against the optimizer facts, and 18 tests."
+    ],
+    tools: ["Python", "scikit-learn", "OR-Tools", "SciPy", "pandas", "Streamlit", "Plotly", "Pytest"],
+    result: "−40 % machining cost, −73 % weighted lateness this week, −24 % maintenance cost; scheduler 2.6 % from the best-known benchmark results.",
+    visual: "sensor",
+    image: "projects/kaizen-optimize.png",
+    github: "https://github.com/vikram-ejjagiri-ai/kaizen-optimize"
+  },
     {
     id: "kaizen-factory-stack",
-    number: "04",
+    number: "05",
     title: "Kaizen Factory Stack: Industry 4.0 Data Platform",
     shortTitle: "Factory Data Platform",
     category: "Industrial AI",
@@ -103,7 +128,7 @@ export const projects = [
   },
     {
     id: "predictive-maintenance",
-    number: "05",
+    number: "06",
     title: "Predictive Maintenance: Machine Failure Prediction",
     shortTitle: "Predictive Maintenance",
     category: "Industrial AI",
@@ -128,7 +153,7 @@ export const projects = [
   },
     {
     id: "visual-quality-inspection",
-    number: "06",
+    number: "07",
     title: "AI Visual Quality Inspection",
     shortTitle: "Visual Inspection",
     category: "Industrial AI",
@@ -153,7 +178,7 @@ export const projects = [
   },
     {
     id: "oee-maintenance-copilot",
-    number: "07",
+    number: "08",
     title: "OEE Dashboard + Maintenance Copilot",
     shortTitle: "OEE + Copilot",
     category: "Industrial AI",
@@ -177,7 +202,7 @@ export const projects = [
   },
   {
     id: "scara",
-    number: "08",
+    number: "09",
     title: "Intelligent SCARA Robotic System",
     shortTitle: "SCARA Robotics",
     category: "Robotics",
@@ -197,7 +222,7 @@ export const projects = [
   },
   {
     id: "ornithopter",
-    number: "09",
+    number: "10",
     title: "Design and Analysis of Ornithopter",
     shortTitle: "Ornithopter",
     category: "Engineering",

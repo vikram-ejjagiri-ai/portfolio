@@ -52,6 +52,22 @@ export const projectsDe = {
     ],
     result: "42 automatische Tests, darunter ein zweiter Nutzer, der die Dateien des ersten weder sehen noch abfragen oder ändern kann; Tabellenänderungen nur nach ausdrücklicher Bestätigung, mit Rückgängig.",
   },
+  "kaizen-optimize": {
+    title: "Kaizen Optimize: Produktionsoptimierung mit echten Daten",
+    description:
+      "Vier Entscheidungen, die ein Zerspanungsbetrieb jede Woche trifft, jeweils auf einem echten öffentlichen Datensatz optimiert: Schnittdaten aus Drehversuchen an C45, Reihenfolgeplanung auf einem veröffentlichten Benchmark, Bauteiltausch aus 23.550 SCANIA-Lkw und Ersatzteilbestand aus 51 Monaten echter Verkäufe. Jeder Optimierer wird mit der heute üblichen Methode verglichen.",
+    objective:
+      "Über die Vorhersage hinaus die Entscheidung selbst treffen: welche Schnittdaten, welcher Auftrag als Nächstes auf welcher Maschine, wann ein Verschleißteil getauscht und wie viel gelagert wird, wobei die Entscheidungen wie in einem echten Werk ineinandergreifen.",
+    achievements: [
+      "Ein Rauheitsmodell (R² 0,95) und ein Taylor-Standzeitmodell (T = 565 · vc^-0,32) an echten Drehversuchen an C45 kalibriert und die gemessene Streuung (±12 %) als Rauschen jedes simulierten Probeschnitts verwendet.",
+      "Bayes'sche Optimierung (Gauß-Prozess, Expected Improvement mit Nebenbedingung) mit DoE + Antwortflächenmodell und Zufallssuche bei 20 Probeschnitten verglichen: Median 4–11 % vom Optimum, im ungünstigen Fall 8–20 % statt bis zu 75 % bei DoE; die empfohlenen Schnittdaten senken die Bearbeitungskosten um 40 %.",
+      "Einen Planer für ungleiche Maschinen mit reihenfolgeabhängigen Rüstzeiten gebaut: Iterated-Greedy-Suche mit 2,6 % mittlerem Abstand zu den besten bekannten Lösungen eines veröffentlichten Benchmarks, vor den veröffentlichten Ergebnissen von CP Optimizer, MILP, Simulated Annealing und LLMs; CP-SAT reproduziert das veröffentlichte Optimum bei 9 von 9 kleinen Instanzen.",
+      "Ein Weibull-Modell mit Zensierung an 23.550 Lkw (90 % noch in Betrieb) angepasst: Verschleißverhalten mit β 2,41, optimales Tauschalter 425 mit Bootstrap-Konfidenzintervall, geprüft per Kaplan-Meier an zurückgehaltenen Fahrzeugen; 24 % geringere Kosten als Betrieb bis zum Ausfall.",
+      "(s, Q)-Bestellregeln für 321 Ersatzteile per Simulation optimiert und an 12 ungesehenen Monaten getestet: Die Lehrbuchformel kostete 39 % mehr, weil die Nachfrage im Lebenszyklus sank – die Planung mit aktueller Nachfrage war wichtiger als die Methode.",
+      "Die Stufen verbunden (schnellere Zerspanung → kürzerer Plan, fällige Bauteile → Wartungsfenster, Werkzeugverbrauch → Ersatzteile), mit Streamlit-Dashboard, einem LLM-Berater, dessen Zahlen gegen die Optimiererfakten geprüft werden, und 18 Tests.",
+    ],
+    result: "−40 % Bearbeitungskosten, −73 % gewichtete Verspätung in dieser Woche, −24 % Instandhaltungskosten; Planer 2,6 % von den besten bekannten Benchmark-Ergebnissen.",
+  },
   "kaizen-factory-stack": {
     title: "Kaizen Factory Stack: Industrie-4.0-Datenplattform",
     description:

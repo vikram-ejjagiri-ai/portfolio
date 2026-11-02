@@ -81,3 +81,4 @@ button.resume-option{text-align:left;font:inherit;color:inherit;cursor:pointer;w
 /* wide architecture diagram: show it whole inside a normal card */
 .project-visual img[src*="production-digitalization-platform"]{object-fit:contain!important;background:#0b0d10}
 .project-visual img[src*="kaizen-assist"]{object-position:left top}
+.project-visual img[src*="kaizen-optimize"]{object-position:center 60%}
