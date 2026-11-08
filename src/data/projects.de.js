@@ -68,6 +68,22 @@ export const projectsDe = {
     ],
     result: "−40 % Bearbeitungskosten, −73 % gewichtete Verspätung in dieser Woche, −24 % Instandhaltungskosten; Planer 2,6 % von den besten bekannten Benchmark-Ergebnissen.",
   },
+  "kaizen-vision": {
+    title: "Kaizen Vision: Vergleich von Bildverarbeitungsverfahren für die Qualitätsprüfung",
+    description:
+      "Ein Prüfstand für die Auswahl des Bildverarbeitungssystems einer Prüfstation: vier Verfahren auf zwei echten Prüfdatensätzen (Stahloberflächenfehler, Gussteile) und ein Test zum Lesen von Teilekennzeichnungen, unter 44 kontrollierten Änderungen von Beleuchtung, Fokus, Bewegung, Rauschen, Auflösung und Kameraposition, angebunden an eine simulierte SPS über OPC UA.",
+    objective:
+      "Die Fragen beantworten, die vor dem Kauf eines Bildverarbeitungssystems stehen: welches Verfahren noch funktioniert, wenn sich die Bedingungen an der Linie ändern, wie viele Trainingsbilder es braucht, was Kamera und Beleuchtung leisten müssen und wie das Ergebnis zur SPS und zum Roboter kommt.",
+    achievements: [
+      "Klassische Bildverarbeitung (Texturmerkmale + SVM), vortrainierte CNN-Merkmale, ein feinabgestimmtes CNN (YOLO11s-cls) und PatchCore-Anomalieerkennung auf echten Bildern verglichen: NEU-Stahloberflächen (6 Fehlerarten) und Gussteile (i. O. / n. i. O.).",
+      "Eine Versuchsreihe mit 11 physikalisch begründeten Änderungen in je 4 Stufen entworfen (Unter-/Überbelichtung, Kontrast, ungleichmäßiges Licht, Fokus, Bewegungsunschärfe, Rauschen, Auflösung, Drehung, Kameraneigung, JPEG): Auf sauberen Bildern liegen alle Verfahren bei 99–100 %, unter veränderten Bedingungen fällt das klassische Verfahren auf 49 %, vortrainierte Merkmale halten 80 % (Stahl).",
+      "Gezeigt, dass Training mit der erwarteten Variation von Licht, Unschärfe und Rauschen der stärkste Hebel ist: Das feinabgestimmte CNN hält 94,4 % (Stahl) und 96,8 % (Guss) unter veränderten Bedingungen; Bedarf an Trainingsbildern (3 Zufallsstichproben je Größe) und Rechenzeit auf der CPU (5–40 ms pro Bild) gemessen.",
+      "Leser für QR-, Data-Matrix- und Klartext-Kennzeichnungen verglichen (OpenCV, ZBar, ZXing-C++, RapidOCR), mit erzeugten Markierungen bekannten Inhalts auf echter Stahltextur.",
+      "Die Station über OPC UA an eine simulierte SPS angebunden, mit dem Handshake einer realen Prüfzelle (Trigger, Busy, Ergebnis, Greifposition und Winkel, Done), fail-safe Ausschleusung, Watchdog und Heartbeat: 36 ms Antwortzeit, jedes Fehlerszenario endete mit ausgeschleustem Teil oder gestoppter Linie.",
+      "ChArUco-Kamerakalibrierung für eine Webcam mit Umrechnung von Pixeln in Millimeter (0,15 mm Positionsfehler im Selbsttest), Kamera-Checkliste (Belichtungszeit, Auflösung, Montagewinkel), Streamlit-Dashboard, Versuchsbericht auf Deutsch und Englisch und 20 Tests.",
+    ],
+    result: "Unter veränderten Bedingungen: klassisches Verfahren 49 %, feinabgestimmtes CNN mit Variation trainiert 94–97 %; SPS-Handshake in 36 ms mit Fail-safe, Watchdog und Heartbeat.",
+  },
   "kaizen-factory-stack": {
     title: "Kaizen Factory Stack: Industrie-4.0-Datenplattform",
     description:

@@ -101,9 +101,34 @@ export const projects = [
     image: "projects/kaizen-optimize.png",
     github: "https://github.com/vikram-ejjagiri-ai/kaizen-optimize"
   },
+  {
+    id: "kaizen-vision",
+    number: "05",
+    title: "Kaizen Vision: Comparing Machine Vision Methods for Quality Inspection",
+    shortTitle: "Kaizen Vision",
+    category: "Industrial AI",
+    tags: ["Computer Vision", "Experiments", "OPC UA"],
+    description:
+      "A test bench for choosing the vision system of an inspection station: four methods on two real inspection datasets (steel surface defects, cast impellers) and a part-marking test, under 44 controlled changes to lighting, focus, motion, noise, resolution and camera position, connected to a simulated PLC over OPC UA.",
+    objective:
+      "Answer the questions an engineer has before buying a vision system: which method still works when conditions on the line change, how many training images it needs, what the camera and lighting must deliver, and how the result reaches the PLC and robot.",
+    achievements: [
+      "Compared classical image processing (texture features + SVM), pretrained CNN features, a fine-tuned CNN (YOLO11s-cls) and PatchCore anomaly detection on real NEU steel-surface (6 defect types) and casting (OK / defective) images.",
+      "Designed a test series with 11 physically motivated changes at 4 levels each (under-/overexposure, contrast, uneven light, defocus, motion blur, noise, resolution, rotation, camera tilt, JPEG): all methods are 99–100 % on clean images, but under changed conditions the classical method falls to 49 % and pretrained features keep 80 % on steel.",
+      "Showed that training with the expected lighting, blur and noise variation is the strongest lever: the fine-tuned CNN keeps 94.4 % (steel) and 96.8 % (casting) under changed conditions; measured training-data needs (3 random subsets per size) and CPU speed (5–40 ms per image).",
+      "Compared readers for QR, Data Matrix and serial-number markings (OpenCV, ZBar, ZXing-C++, RapidOCR) on generated markings with known content on real steel texture.",
+      "Connected the station to a simulated PLC over OPC UA with the handshake of a real inspection cell (trigger, busy, result, pick position and angle, done), fail-safe rejection, watchdog and heartbeat: 36 ms response time, every fault scenario ended with the part rejected or the line stopped.",
+      "Built ChArUco camera calibration for a webcam with pixel-to-millimetre conversion (0.15 mm position error in the self-check), a camera checklist (exposure time, resolution, mounting angle), a Streamlit dashboard, a test report in English and German, and 20 tests."
+    ],
+    tools: ["Python", "OpenCV", "PyTorch", "scikit-learn", "OPC UA (asyncua)", "Streamlit", "Plotly", "Pytest"],
+    result: "Under changed conditions: classical method 49 %, fine-tuned CNN trained with variation 94–97 %; PLC handshake in 36 ms with fail-safe, watchdog and heartbeat.",
+    visual: "sensor",
+    image: "projects/kaizen-vision.png",
+    github: "https://github.com/vikram-ejjagiri-ai/kaizen-vision"
+  },
     {
     id: "kaizen-factory-stack",
-    number: "05",
+    number: "06",
     title: "Kaizen Factory Stack: Industry 4.0 Data Platform",
     shortTitle: "Factory Data Platform",
     category: "Industrial AI",
@@ -128,7 +153,7 @@ export const projects = [
   },
     {
     id: "predictive-maintenance",
-    number: "06",
+    number: "07",
     title: "Predictive Maintenance: Machine Failure Prediction",
     shortTitle: "Predictive Maintenance",
     category: "Industrial AI",
@@ -153,7 +178,7 @@ export const projects = [
   },
     {
     id: "visual-quality-inspection",
-    number: "07",
+    number: "08",
     title: "AI Visual Quality Inspection",
     shortTitle: "Visual Inspection",
     category: "Industrial AI",
@@ -178,7 +203,7 @@ export const projects = [
   },
     {
     id: "oee-maintenance-copilot",
-    number: "08",
+    number: "09",
     title: "OEE Dashboard + Maintenance Copilot",
     shortTitle: "OEE + Copilot",
     category: "Industrial AI",
@@ -202,7 +227,7 @@ export const projects = [
   },
   {
     id: "scara",
-    number: "09",
+    number: "10",
     title: "Intelligent SCARA Robotic System",
     shortTitle: "SCARA Robotics",
     category: "Robotics",
@@ -222,7 +247,7 @@ export const projects = [
   },
   {
     id: "ornithopter",
-    number: "10",
+    number: "11",
     title: "Design and Analysis of Ornithopter",
     shortTitle: "Ornithopter",
     category: "Engineering",

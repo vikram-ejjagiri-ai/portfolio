@@ -49,14 +49,19 @@ EN = {
                  "optimization vs DOE, −40 % machining cost) and job sequencing on a published benchmark (2.6 % from best known).",
                  "Censored Weibull fit on 23,550 SCANIA trucks (best replacement age, −24 % cost vs run to failure) and (s, Q) "
                  "spare-part policies tested on 12 unseen months; Streamlit dashboard, number-checked LLM advisor, 18 tests."]),
+        proj("Kaizen Vision: Comparing Machine Vision Methods for Quality Inspection", "OpenCV · PyTorch · scikit-learn · OPC UA",
+             "kaizen-vision", [
+                 "Test bench for choosing a station's vision system: classical features + SVM, CNN features, fine-tuned CNN and "
+                 "PatchCore on real steel-surface and casting images under 44 changes of light, focus, motion, noise and camera "
+                 "position: all 99–100 % when clean, classical 49 % vs fine-tuned CNN trained with variation 94–97 % when changed.",
+                 "OPC UA handshake with a simulated PLC (trigger, result, pick position, fail-safe, watchdog, heartbeat; 36 ms), "
+                 "ChArUco webcam calibration (pixel to mm), code readers (QR, Data Matrix, OCR), EN/DE test report, 20 tests."]),
         proj("Production Digitalization Platform: Sensor to Dashboard", "MQTT · TimescaleDB · Docker · scikit-learn · SimPy",
              "production-digitalization-platform", [
                  "One-click shopfloor platform (Docker Compose): real compressor data (MetroPT-3) and a simulated RFID assembly "
                  "line (SimPy) over MQTT into TimescaleDB, with data harmonization and RFID de-duplication.",
-                 "KPI engine for OEE, FPY, MTBF/MTTR and RFID lead time; health model (Isolation Forest + SPC z-score) trained on the "
-                 "commissioning period: in the end-to-end run the alarm opened about 2.5 h before the first reported failure.",
-                 "AI advisor with retrieval over FMEA/SOPs and a local LLM (rule-based fallback); three Grafana dashboards as code, SQL "
-                 "views for Power BI; 20 unit tests."]),
+                 "KPI engine (OEE, FPY, MTBF/MTTR, RFID lead time), health model (Isolation Forest + SPC) with an alarm about 2.5 h "
+                 "before the first reported failure, AI advisor over FMEA/SOPs, Grafana dashboards as code; 20 unit tests."]),
         proj("Kaizen Assist: GenAI Knowledge Assistant for Engineering", "RAG · Text-to-SQL · DuckDB · Ollama · Streamlit",
              "kaizen-assist", [
                  "Hybrid retrieval (BM25 + embeddings, RRF) over specifications, test procedures and PDF test reports with version "
@@ -70,21 +75,18 @@ EN = {
                  "Safe AI edits (preview, confirm, verify, undo; originals unchanged), private accounts per user, version history, "
                  "LLM fallback chain (Groq, Gemini, Claude, Ollama); 42 tests incl. two-user isolation."]),
         proj("OEE Dashboard &amp; Maintenance Copilot", "Python · pandas · Streamlit · Ollama · RAG", "kaizen-oee-maintenance-copilot", [
-                 "OEE engine per ISO 22400 with data-quality checks (duplicate MES records, wrong bookings), KPIs tested against an independent calculation; 13 weeks of MES data: OEE 76.8 %, biggest losses from speed and changeovers.",
-                 "RAG copilot with a local LLM (Qwen 2.5 7B via Ollama): numbers from the OEE engine, hybrid search over manuals and work orders, safety guardrails; 95.9 % pass rate on 49 test questions."]),
+                 "OEE engine per ISO 22400 with MES data-quality checks (13 weeks: OEE 76.8 %) and a RAG copilot with a local LLM (Ollama) over manuals and work orders; 95.9 % on 49 test questions."]),
         proj("Visual Quality Inspection with Anomaly Detection", "PyTorch · ONNX Runtime · Streamlit", "kaizen-visual-quality-inspection", [
-                 "PatchCore implemented from scratch in PyTorch, trained only on defect-free images (MVTec AD); image AUROC 1.000 (baseline 0.828), pixel AUROC 0.989.",
-                 "Cost-based threshold caught 46 of 47 unseen defects with zero good parts rejected; operator review app with heatmaps, ONNX export (about 120 ms per image on CPU)."]),
+                 "PatchCore from scratch in PyTorch on defect-free MVTec AD images (image AUROC 1.000); cost-based threshold caught 46 of 47 unseen defects with no good part rejected; heatmap review app, ONNX export."]),
         proj("Predictive Maintenance: Failure Classification for a CNC Milling Machine", "scikit-learn · SHAP · Power BI · DAX",
              "kaizen-machine-failure-prediction", [
-                 "Failure classification on the public AI4I 2020 dataset (not remaining useful life: no timestamps); physics-based features cut the model's error cost by about a third.",
-                 "Random forest with 82 % recall at 93 % precision, benchmarked against expert rules; every alarm explained with SHAP; Power BI dashboard with a threshold what-if."]),
+                 "Failure classification on AI4I 2020 with physics-based features (error cost about −⅓): random forest 82 % recall at 93 % precision vs expert rules, SHAP explanations, Power BI what-if."]),
         proj("Industry 4.0 Data Platform", "OPC UA · MQTT · PostgreSQL · Grafana", "kaizen-factory-stack", [
             "Simulated bottling line (7 sensors) as OPC UA server, OPC UA → MQTT bridge, PostgreSQL, live Grafana dashboard."]),
     ],
     "skills": [
         ("Programming &amp; data", "Python, SQL, pandas, NumPy, Git, Pytest, Playwright, SQLite, DuckDB"),
-        ("Machine learning &amp; vision", "scikit-learn (random forest, Isolation Forest), PyTorch, PatchCore anomaly detection, "
+        ("Machine learning &amp; vision", "scikit-learn (random forest, Isolation Forest), PyTorch, OpenCV, camera calibration (ChArUco), robustness testing, PatchCore anomaly detection, "
                                         "SHAP explainability, ONNX Runtime, feature engineering, cost-based thresholds"),
         ("Optimization &amp; statistics", "Bayesian optimization (Gaussian processes), DOE and response surfaces, scheduling with "
                                         "OR-Tools (CP-SAT) and local search, (s, Q) inventory policies, discrete-event simulation "
@@ -137,14 +139,19 @@ DE = {
                  "(Bayes-Optimierung vs. DoE, −40 % Bearbeitungskosten), Reihenfolgeplanung im Benchmark (2,6 % vom Bestwert).",
                  "Weibull-Modell mit Zensierung an 23.550 SCANIA-Lkw (optimales Tauschalter, −24 % Kosten ggü. Ausfall) und (s, Q)-"
                  "Bestellregeln, getestet an 12 ungesehenen Monaten; Streamlit-Dashboard, geprüfter LLM-Berater, 18 Tests."]),
+        proj("Kaizen Vision: Vergleich von Bildverarbeitungsverfahren für die Qualitätsprüfung", "OpenCV · PyTorch · scikit-learn · OPC UA",
+             "kaizen-vision", [
+                 "Prüfstand zur Auswahl des Bildverarbeitungssystems: klassische Merkmale + SVM, CNN-Merkmale, feinabgestimmtes CNN und "
+                 "PatchCore auf echten Stahl- und Gussteilbildern unter 44 Änderungen von Licht, Fokus, Bewegung, Rauschen und "
+                 "Kameraposition: sauber alle 99–100 %, verändert klassisch 49 %, mit Variation trainiertes CNN 94–97 %.",
+                 "OPC-UA-Handshake mit simulierter SPS (Trigger, Ergebnis, Greifposition, Fail-safe, Watchdog, Heartbeat; 36 ms), "
+                 "ChArUco-Kalibrierung einer Webcam (Pixel in mm), Code-Leser (QR, Data Matrix, OCR), Versuchsbericht DE/EN, 20 Tests."]),
         proj("Produktions-Digitalisierungsplattform: vom Sensor zum Dashboard", "MQTT · TimescaleDB · Docker · scikit-learn · SimPy",
              "production-digitalization-platform", [
                  "Shopfloor-Plattform mit Ein-Klick-Start (Docker Compose): echte Kompressordaten (MetroPT-3) und simulierte "
                  "RFID-Montagelinie (SimPy) über MQTT in TimescaleDB, mit Datenharmonisierung und RFID-Deduplizierung.",
-                 "KPI-Engine für OEE, FPY, MTBF/MTTR und RFID-Durchlaufzeit; Zustandsmodell (Isolation Forest + SPC-z-Score), trainiert "
-                 "auf der Inbetriebnahmephase: im End-to-End-Lauf Alarm ca. 2,5 h vor dem ersten gemeldeten Ausfall.",
-                 "KI-Berater mit Suche in FMEA/SOPs und lokalem LLM (regelbasierter Fallback); drei Grafana-Dashboards als Code, "
-                 "SQL-Views für Power BI; 20 Unit-Tests."]),
+                 "KPI-Engine (OEE, FPY, MTBF/MTTR, RFID-Durchlaufzeit), Zustandsmodell (Isolation Forest + SPC) mit Alarm ca. 2,5 h "
+                 "vor dem ersten gemeldeten Ausfall, KI-Berater über FMEA/SOPs, Grafana-Dashboards als Code; 20 Unit-Tests."]),
         proj("Kaizen Assist: GenAI-Wissensassistent für das Engineering", "RAG · Text-to-SQL · DuckDB · Ollama · Streamlit",
              "kaizen-assist", [
                  "Hybride Suche (BM25 + Embeddings, RRF) über Spezifikationen, Prüfanweisungen und PDF-Prüfberichte mit Versionslogik; "
@@ -158,21 +165,18 @@ DE = {
                  "Sichere KI-Änderungen (Vorschau, Bestätigung, Prüfung, Rückgängig; Originale unverändert), private Konten, "
                  "Versionshistorie, LLM-Fallback (Groq, Gemini, Claude, Ollama); 42 Tests inkl. Nutzertrennung."]),
         proj("OEE-Dashboard &amp; Instandhaltungs-Copilot", "Python · pandas · Streamlit · Ollama · RAG", "kaizen-oee-maintenance-copilot", [
-                 "OEE-Berechnung nach ISO 22400 mit Datenqualitätsprüfungen (doppelte MES-Datensätze, Fehlbuchungen), gegen eine unabhängige Berechnung getestet; 13 Wochen MES-Daten: OEE 76,8 %, größte Verluste durch Taktverluste und Rüsten.",
-                 "RAG-Copilot mit lokalem LLM (Qwen 2.5 7B via Ollama): Zahlen aus der OEE-Engine, hybride Suche in Handbüchern und Arbeitsaufträgen, Sicherheits-Guardrails; 95,9 % Erfolgsquote auf 49 Testfragen."]),
+                 "OEE-Engine nach ISO 22400 mit MES-Datenqualitätsprüfungen (13 Wochen: OEE 76,8 %) und RAG-Copilot mit lokalem LLM (Ollama) über Handbücher und Arbeitsaufträge; 95,9 % auf 49 Testfragen."]),
         proj("Visuelle Qualitätsprüfung mit Anomalieerkennung", "PyTorch · ONNX Runtime · Streamlit", "kaizen-visual-quality-inspection", [
-                 "PatchCore von Grund auf in PyTorch implementiert, Training nur mit fehlerfreien Bildern (MVTec AD); Bild-AUROC 1,000 (Baseline 0,828), Pixel-AUROC 0,989.",
-                 "Kostenbasierte Schwelle: 46 von 47 unbekannten Fehlern erkannt, kein Gutteil ausgeschleust; Prüfoberfläche mit Heatmaps, ONNX-Export (ca. 120 ms pro Bild auf der CPU)."]),
+                 "PatchCore von Grund auf in PyTorch, nur mit fehlerfreien MVTec-AD-Bildern trainiert (Bild-AUROC 1,000); kostenbasierte Schwelle: 46 von 47 unbekannten Fehlern erkannt, kein Gutteil ausgeschleust; ONNX-Export."]),
         proj("Predictive Maintenance: Ausfallklassifikation einer CNC-Fräsmaschine", "scikit-learn · SHAP · Power BI · DAX",
              "kaizen-machine-failure-prediction", [
-                 "Ausfallklassifikation auf dem öffentlichen Datensatz AI4I 2020 (keine Restlebensdauer: keine Zeitstempel); physikbasierte Merkmale senkten die Fehlerkosten um etwa ein Drittel.",
-                 "Random Forest mit 82 % Recall bei 93 % Präzision, verglichen mit Expertenregeln; jeder Alarm mit SHAP erklärt; Power-BI-Dashboard mit Schwellenwert-Simulation."]),
+                 "Ausfallklassifikation auf AI4I 2020 mit physikbasierten Merkmalen (Fehlerkosten ca. −⅓): Random Forest 82 % Recall bei 93 % Präzision vs. Expertenregeln, SHAP-Erklärungen, Power-BI-Simulation."]),
         proj("Industrie-4.0-Datenplattform", "OPC UA · MQTT · PostgreSQL · Grafana", "kaizen-factory-stack", [
             "Simulierte Abfüllanlage (7 Sensoren) als OPC-UA-Server, OPC-UA→MQTT-Bridge, PostgreSQL, Grafana-Dashboard."]),
     ],
     "skills": [
         ("Programmierung &amp; Daten", "Python, SQL, pandas, NumPy, Git, Pytest, Playwright, SQLite, DuckDB"),
-        ("Machine Learning &amp; Vision", "scikit-learn (Random Forest, Isolation Forest), PyTorch, PatchCore-Anomalieerkennung, "
+        ("Machine Learning &amp; Vision", "scikit-learn (Random Forest, Isolation Forest), PyTorch, OpenCV, Kamerakalibrierung (ChArUco), Robustheitstests, PatchCore-Anomalieerkennung, "
                                          "SHAP-Erklärbarkeit, ONNX Runtime, Feature Engineering, kostenbasierte Schwellwerte"),
         ("Optimierung &amp; Statistik", "Bayes-Optimierung (Gauß-Prozesse), DoE und Response-Surface, Reihenfolgeplanung mit "
                                        "OR-Tools (CP-SAT) und lokaler Suche, (s, Q)-Bestellregeln, ereignisdiskrete Simulation "

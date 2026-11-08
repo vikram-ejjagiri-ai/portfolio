@@ -40,6 +40,15 @@ export const evidence = {
         "The scheduling instances are research benchmarks, and maintenance time is in the dataset's anonymised units.",
       ],
     },
+    "kaizen-vision": {
+      maturity: [["data", "Real public images (NEU steel, castings) + generated markings"], ["ok", "Fixed test set · 44 test conditions · 20 unit tests"], ["gap", "Conditions simulated; no industrial camera or real PLC yet"]],
+      flow: ["Real images (steel, castings)", "Controlled changes: light, focus, motion, noise, camera", "4 methods: classical, CNN features, fine-tuned CNN, PatchCore", "Accuracy, misses, false rejects, speed, data needs", "Recommendation + camera checklist", "OPC UA handshake with the PLC (result, pick position)"],
+      limits: [
+        "The changed conditions are simulated on real images; they show which effects matter, not the behaviour of a specific camera.",
+        "Public datasets taken under controlled conditions; part markings are generated on real steel texture.",
+        "PLC and robot are simulated on one computer; the webcam calibration converts pixels to millimetres but no robot is driven.",
+      ],
+    },
     "kaizen-factory-stack": {
       maturity: [["data", "Prototype · simulated bottling line"], ["ok", "Runs locally end to end"], ["gap", "Not yet tested on a real PLC"]],
       flow: ["OPC UA simulator (3 machines, 7 sensors)", "OPC UA → MQTT bridge", "Mosquitto broker", "Ingest service", "PostgreSQL", "Grafana dashboard"],
@@ -111,6 +120,15 @@ export const evidence = {
         "Die vier Datensätze stammen aus verschiedenen Quellen; die Verbindungen zwischen den Stufen zeigen das Zusammenspiel, sie sind keine Messungen aus einem Werk.",
         "Kosten (Maschinenstundensatz, Wendeplatten, Reparaturen, Teilewerte) sind Annahmen; das Schnittmodell interpoliert einen 2-Stufen-Versuch.",
         "Die Planungsinstanzen sind Forschungs-Benchmarks, und die Instandhaltungszeit liegt in anonymisierten Einheiten des Datensatzes vor.",
+      ],
+    },
+    "kaizen-vision": {
+      maturity: [["data", "Echte öffentliche Bilder (NEU-Stahl, Gussteile) + erzeugte Kennzeichnungen"], ["ok", "Fester Testsatz · 44 Prüfbedingungen · 20 Unit-Tests"], ["gap", "Bedingungen simuliert; noch keine Industriekamera und keine echte SPS"]],
+      flow: ["Echte Bilder (Stahl, Gussteile)", "Kontrollierte Änderungen: Licht, Fokus, Bewegung, Rauschen, Kamera", "4 Verfahren: klassisch, CNN-Merkmale, feinabgestimmtes CNN, PatchCore", "Genauigkeit, Schlupf, Pseudoausschuss, Rechenzeit, Datenbedarf", "Empfehlung + Kamera-Checkliste", "OPC-UA-Handshake mit der SPS (Ergebnis, Greifposition)"],
+      limits: [
+        "Die veränderten Bedingungen sind auf echten Bildern simuliert; sie zeigen, welche Effekte zählen, nicht das Verhalten einer bestimmten Kamera.",
+        "Öffentliche Datensätze mit kontrollierter Aufnahme; die Kennzeichnungen sind auf echter Stahltextur erzeugt.",
+        "SPS und Roboter sind auf einem Rechner simuliert; die Webcam-Kalibrierung rechnet Pixel in Millimeter um, ein Roboter wird nicht angesteuert.",
       ],
     },
     "kaizen-factory-stack": {
